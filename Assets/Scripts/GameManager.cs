@@ -7,11 +7,13 @@ public class GameManager : MonoBehaviour
 {
 
     #region private var
-    private int _fieldWidth;
-    private int _fieldHeight;
-    private int _winLine;
+    private int _fieldWidth = 3;
+    private int _fieldHeight = 3;
+    private int _winLine = 3;
     #endregion
 
+    
+    
     #region props
     public int FieldWidth
     {

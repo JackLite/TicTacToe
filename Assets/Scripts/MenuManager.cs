@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
@@ -9,7 +10,11 @@ public class MenuManager : MonoBehaviour
     [SerializeField] public GameObject Options;
     [SerializeField] public GameObject Autors;
 
-
+    private void Awake()
+    { 
+        Debug.Log( Screen.dpi );
+        MainMenu.GetComponent<VerticalLayoutGroup>().spacing = Screen.height * .05f;
+    }
     public void ShowOptions()
     {
         MainMenu.SetActive(false);
@@ -32,4 +37,5 @@ public class MenuManager : MonoBehaviour
     {
         GameManager.getInstance().StartGame();
     }
+
 }

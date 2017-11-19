@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayersManager : MonoBehaviour {
     [SerializeField] GameObject playerPrefab;
-    private void Awake()
+    private void Start()
     {
         GameObject PlayerOne = GameObject.Instantiate<GameObject>(playerPrefab);
         PlayerController playerOneController = PlayerOne.GetComponent<PlayerController>();

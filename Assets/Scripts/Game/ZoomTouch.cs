@@ -9,6 +9,8 @@ public class ZoomTouch : MonoBehaviour
     private float horSize;
     private float vertSize;
 
+    public float maxZoom = 3f;
+    public float minZoom = .5f;
     public float speedZoom = .5f;
     [SerializeField] public GameObject GameField;
 
@@ -28,7 +30,7 @@ public class ZoomTouch : MonoBehaviour
             float prevDist = (prevZeroPosition - prevOnePosition).magnitude;
             float dist = (touchZero.position - touchOne.position).magnitude;
             currentZoom = currentZoom + (dist - prevDist)/dist * speedZoom;
-            currentZoom = Mathf.Clamp(currentZoom, .1f, 3f);
+            currentZoom = Mathf.Clamp(currentZoom, minZoom, maxZoom);
             GameField.GetComponent<RectTransform>().localScale = new Vector3(currentZoom, currentZoom, 1);
         }
     }
