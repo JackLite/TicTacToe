@@ -22,12 +22,12 @@ public class MoveTouch : MonoBehaviour
         if (Input.touchCount == 1)
         {
             Vector2 curPos = Input.GetTouch(0).position;
-            Vector2 prevPos = Input.GetTouch(0).deltaPosition;
+            Vector2 prevPos = curPos - Input.GetTouch(0).deltaPosition;
             float horDelta = curPos.x - prevPos.x;
             float vertDelta = curPos.y - prevPos.y;
             float newHorPos = GameField.GetComponent<RectTransform>().localPosition.x + horDelta * speedMove * Time.deltaTime;
-            GameField.GetComponent<RectTransform>().localPosition = new Vector3(newHorPos, 0);
-            GetComponent<GameLog>().ShowLog(newHorPos);
+            float newVertPos = GameField.GetComponent<RectTransform>().localPosition.y + vertDelta * speedMove * Time.deltaTime;
+            GameField.GetComponent<RectTransform>().localPosition = new Vector3(newHorPos, newVertPos);
         }
     }
 }
