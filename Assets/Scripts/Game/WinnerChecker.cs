@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using TrueGames; 
 
 public class WinnerChecker : MonoBehaviour
 {
@@ -28,26 +29,26 @@ public class WinnerChecker : MonoBehaviour
         
         if (checkHorizontal(last_hor, last_vert, fieldState))
         {
-            showWinner("Winner is " + fieldState[last_hor, last_vert]);
+            showWinner(fieldState[last_hor, last_vert]);
             return true;
         }
         else if (checkVertical(last_hor, last_vert, fieldState))
         {
-            showWinner("Winner is " + fieldState[last_hor, last_vert]);
+            showWinner(fieldState[last_hor, last_vert]);
             return true;
         }
         else if (checkDiagonal(last_hor, last_vert, fieldState))
         {
-            showWinner("Winner is " + fieldState[last_hor, last_vert]);
+            showWinner(fieldState[last_hor, last_vert]);
             return true;
         }
         return false;
     }
-    private void showWinner(string Text)
+    private void showWinner(CellController.State state)
     {
-        GameObject winText = fieldManager.winPanel.transform.GetChild(0).gameObject;
-        winText.GetComponent<Text>().text = Text;
-        fieldManager.winPanel.SetActive(true);
+        SceneManager sceneManager = fieldManager.sceneManager.GetComponent<SceneManager>();
+        sceneManager.WinText.GetComponent<Text>().text = "Победили " + GameManager.getInstance().getWinnerName(state);
+        sceneManager.ShowWinner();
     }
     private bool checkHorizontal(int last_hor, int last_vert, CellController.State[,] fieldState)
     {

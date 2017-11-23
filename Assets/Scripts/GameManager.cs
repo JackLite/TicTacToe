@@ -7,9 +7,11 @@ public class GameManager : MonoBehaviour
 {
 
     #region private var
-    private int _fieldWidth = 9;
-    private int _fieldHeight = 9;
+    private int _fieldWidth = 3;
+    private int _fieldHeight = 3;
     private int _winLine = 3;
+    private Side cross;
+    private Side zero;
     #endregion
 
     
@@ -52,11 +54,7 @@ public class GameManager : MonoBehaviour
 
     public string gameSceneName = "Game";
     public string menuSceneName = "Menu";
-    public enum Side
-    {
-        cross,
-        zero
-    }
+    
 
     private void Awake()
     {
@@ -68,6 +66,11 @@ public class GameManager : MonoBehaviour
         instance = this;
 
         DontDestroyOnLoad(gameObject);
+
+        cross.code = "cross";
+        cross.name = "крестики";
+        zero.code = "zero";
+        zero.name = "нолики";
     }
     
     public static GameManager Instance
@@ -92,5 +95,21 @@ public class GameManager : MonoBehaviour
     public void ExitToMenu()
     {
         SceneManager.LoadScene(menuSceneName);
+    }
+
+    public string getWinnerName(CellController.State state)
+    {
+        if(state == CellController.State.cross)
+        {
+            return cross.name;
+        }
+        else if(state == CellController.State.zero)
+        {
+            return zero.name;
+        }
+        else
+        {
+            throw new System.Exception("Передано неверное состояние");
+        }
     }
 }

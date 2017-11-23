@@ -8,11 +8,9 @@ public class PlayersManager : MonoBehaviour {
     {
         GameObject PlayerOne = GameObject.Instantiate<GameObject>(playerPrefab);
         PlayerController playerOneController = PlayerOne.GetComponent<PlayerController>();
-        playerOneController.side = GameManager.Side.cross;
 
         GameObject PlayerTwo = GameObject.Instantiate<GameObject>(playerPrefab);
         PlayerController playerTwoController = PlayerTwo.GetComponent<PlayerController>();
-        playerTwoController.side = GameManager.Side.zero;
     }
 
 }

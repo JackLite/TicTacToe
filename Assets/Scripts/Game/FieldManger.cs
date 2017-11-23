@@ -17,7 +17,6 @@ public class FieldManger : MonoBehaviour
     private GameObject[] cells;
 
     [SerializeField] public GameObject sceneManager;
-    [SerializeField] public GameObject winPanel;
     private int horCellsCount;
     private int vertCellsCount;
     public int cellSize = 100;

@@ -5,17 +5,13 @@ using UnityEngine;
 namespace TrueGames {
     public class SceneManager : MonoBehaviour
     {
-        [SerializeField]
-        public Sprite cell;
-
-        [SerializeField]
-        public Sprite cross;
-
-        [SerializeField]
-        public Sprite zero;
-
-        [SerializeField]
-        public GameObject AI;
+        [SerializeField] public Sprite cell;
+        [SerializeField] public Sprite cross;
+        [SerializeField] public Sprite zero;
+        [SerializeField] public GameObject AI;
+        [SerializeField] public GameObject GameScreen;
+        [SerializeField] public GameObject EndGameScreen;
+        [SerializeField] public GameObject WinText;
 
         public Sprite getCell()
         {
@@ -39,6 +35,12 @@ namespace TrueGames {
             {
                 GameManager.getInstance().ExitToMenu();
             }
+        }
+
+        public void ShowWinner()
+        {
+            GameScreen.SetActive(false);
+            EndGameScreen.SetActive(true);
         }
     }
 }
