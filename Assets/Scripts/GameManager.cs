@@ -7,8 +7,8 @@ public class GameManager : MonoBehaviour
 {
 
     #region private var
-    private int _fieldWidth = 3;
-    private int _fieldHeight = 3;
+    private int _fieldWidth = 9;
+    private int _fieldHeight = 9;
     private int _winLine = 3;
     private Side cross;
     private Side zero;

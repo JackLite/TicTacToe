@@ -6,21 +6,29 @@ using UnityEngine.UI;
 
 public class OptionsManager : MonoBehaviour {
 
+    [SerializeField] GameObject SliderWidth;
+    [SerializeField] GameObject SliderHeight;
+    [SerializeField] GameObject SliderWinScore;
+
     public void changeWidthText(float width)
     {
         GetComponent<Text>().text = "Ширина поля: " + width;
-        GameManager.getInstance().FieldWidth = Mathf.RoundToInt(width);
     }
 
     public void changeHeightText(float height)
     {
         GetComponent<Text>().text = "Высота поля: " + height;
-        GameManager.getInstance().FieldHeight = Mathf.RoundToInt(height);
     }
 
     public void changeWinLine(float length)
     {
         GetComponent<Text>().text = "Длина линии: " + length;
-        GameManager.getInstance().WinLine = Mathf.RoundToInt(length);
+    }
+
+    public void setParams()
+    {
+        GameManager.getInstance().FieldWidth = Mathf.RoundToInt(SliderWidth.GetComponent<Slider>().value);
+        GameManager.getInstance().FieldHeight = Mathf.RoundToInt(SliderHeight.GetComponent<Slider>().value);
+        GameManager.getInstance().WinLine = Mathf.RoundToInt(SliderWinScore.GetComponent<Slider>().value);
     }
 } 

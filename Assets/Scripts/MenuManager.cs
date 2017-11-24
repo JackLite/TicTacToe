@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class MenuManager : MonoBehaviour
 {
 
+    private OptionsManager optionsManager;
+
     [SerializeField] public GameObject MainMenu;
     [SerializeField] public GameObject Options;
     [SerializeField] public GameObject Autors;
@@ -14,8 +16,8 @@ public class MenuManager : MonoBehaviour
 
     private void Awake()
     { 
-        Debug.Log( Screen.dpi );
         MainMenu.GetComponent<VerticalLayoutGroup>().spacing = Screen.height * .05f;
+        optionsManager = GetComponent<OptionsManager>();
     }
     public void ShowOptions(bool isStartGame)
     {
@@ -47,6 +49,7 @@ public class MenuManager : MonoBehaviour
 
     public void StartGame()
     {
+        optionsManager.setParams();
         GameManager.getInstance().StartGame();
     }
 
