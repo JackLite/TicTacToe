@@ -42,5 +42,10 @@ namespace TrueGames {
             GameScreen.SetActive(false);
             EndGameScreen.SetActive(true);
         }
+
+        public void returnToMenu()
+        {
+            GameManager.getInstance().ExitToMenu();
+        }
     }
 }
