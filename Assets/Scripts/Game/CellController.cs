@@ -8,6 +8,7 @@ using TrueGames;
 public class CellController : MonoBehaviour
 {
     private AI AI;
+    private bool choosen = false;
 
     public const string childName = "inner"; 
 
@@ -27,6 +28,19 @@ public class CellController : MonoBehaviour
         cross,
         zero
     }
+    public Color choosenColor;
+    public bool Choosen
+    {
+        get
+        {
+            return choosen;
+        }
+        set
+        {
+            choosen = value;
+        }
+    }
+   
 
     public State currentState = State.empty;
 
@@ -37,9 +51,13 @@ public class CellController : MonoBehaviour
 
     public void clickHandler(BaseEventData eventData)
     {
-        if (currentState == State.empty)
+        if(!choosen)
         {
-            
+            resetChoosen();
+            setChoosen();
+        }
+        else if (currentState == State.empty)
+        {
             if (fieldManager.lastState == State.zero)
             {
                 setState(State.cross);
@@ -62,5 +80,18 @@ public class CellController : MonoBehaviour
         fieldManager.lastState = state;
         fieldManager.updateFieldState(hor_number, vert_number, this);
         fieldManager.gameObject.GetComponent<WinnerChecker>().checkWinner(hor_number, vert_number, fieldManager.fieldState);
+    }
+
+    private void setChoosen()
+    {
+        sceneManager.GetComponent<SceneManager>().LastCell = gameObject;
+        choosen = true;
+        Image innerImage = transform.Find(childName).GetComponent<Image>();
+        innerImage.color = choosenColor;
+    }
+
+    private void resetChoosen()
+    {
+        sceneManager.GetComponent<SceneManager>().resetLastCell();
     }
 }

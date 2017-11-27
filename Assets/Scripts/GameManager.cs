@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
         }
         set
         {
-            _winLine = Mathf.Clamp(value, Mathf.Min(_fieldWidth, _fieldHeight), Mathf.Max(_fieldWidth, _fieldHeight));
+            _winLine = Mathf.Clamp(value, 3, 9);
         }
     }
     #endregion

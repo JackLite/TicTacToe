@@ -1,10 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-namespace TrueGames {
+namespace TrueGames
+{
     public class SceneManager : MonoBehaviour
     {
+        private GameObject lastCell;
+
         [SerializeField] public Sprite cell;
         [SerializeField] public Sprite cross;
         [SerializeField] public Sprite zero;
@@ -12,6 +16,18 @@ namespace TrueGames {
         [SerializeField] public GameObject GameScreen;
         [SerializeField] public GameObject EndGameScreen;
         [SerializeField] public GameObject WinText;
+
+        public GameObject LastCell
+        {
+            get
+            {
+                return lastCell;
+            }
+            set
+            {
+                lastCell = value;
+            }
+        }
 
         public Sprite getCell()
         {
@@ -23,7 +39,8 @@ namespace TrueGames {
             if (state == CellController.State.cross)
             {
                 return cross;
-            } else
+            }
+            else
             {
                 return zero;
             }
@@ -31,7 +48,7 @@ namespace TrueGames {
 
         public void Update()
         {
-            if(Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
                 GameManager.getInstance().ExitToMenu();
             }
@@ -46,6 +63,19 @@ namespace TrueGames {
         public void returnToMenu()
         {
             GameManager.getInstance().ExitToMenu();
+        }
+
+        public void resetLastCell()
+        {
+            if (
+                LastCell is GameObject
+                && LastCell.GetComponent<CellController>().Choosen
+                && LastCell.GetComponent<CellController>().currentState == CellController.State.empty
+                )
+            {
+                LastCell.transform.transform.Find(CellController.childName).GetComponent<Image>().color = new Color(0, 0, 0, 0);
+                LastCell.GetComponent<CellController>().Choosen = false;
+            }
         }
     }
 }
