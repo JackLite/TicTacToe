@@ -54,7 +54,6 @@ public class GameManager : MonoBehaviour
 
     public string gameSceneName = "Game";
     public string menuSceneName = "Menu";
-    
 
     private void Awake()
     {

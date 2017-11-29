@@ -1,16 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayersManager : MonoBehaviour {
-    [SerializeField] GameObject playerPrefab;
-    private void Start()
-    {
-        GameObject PlayerOne = GameObject.Instantiate<GameObject>(playerPrefab);
-        PlayerController playerOneController = PlayerOne.GetComponent<PlayerController>();
 
-        GameObject PlayerTwo = GameObject.Instantiate<GameObject>(playerPrefab);
-        PlayerController playerTwoController = PlayerTwo.GetComponent<PlayerController>();
+    public string playerOneName
+    {
+        get; set;
+    }
+    public string playerTwoName
+    {
+        get; set;
+    }
+
+    [SerializeField] GameObject playerPrefab;
+
+    public string getWhoMoveNick(CellController.State state)
+    {
+        if(state == CellController.State.cross)
+        {
+            return playerOneName;
+        }
+        else if(state == CellController.State.zero)
+        {
+            return playerTwoName;
+        }
+        else
+        {
+            return playerOneName;
+        }
     }
 
 }

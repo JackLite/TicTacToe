@@ -58,6 +58,7 @@ public class CellController : MonoBehaviour
         }
         else if (currentState == State.empty)
         {
+            sceneManager.gameObject.GetComponent<TextMoveController>().changeWhoMove(fieldManager.lastState);
             if (fieldManager.lastState == State.zero)
             {
                 setState(State.cross);

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class OptionsManager : MonoBehaviour {
+public class PreGameOptionsManager : MonoBehaviour {
 
     [SerializeField] GameObject SliderWidth;
     [SerializeField] GameObject SliderHeight;
