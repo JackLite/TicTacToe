@@ -18,7 +18,7 @@ public class CellController : MonoBehaviour
     {
         get; set;
     }
-    public FieldManger fieldManager
+    public FieldManager fieldManager
     {
         get; set;
     }

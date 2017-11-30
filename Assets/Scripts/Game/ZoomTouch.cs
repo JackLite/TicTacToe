@@ -16,8 +16,8 @@ public class ZoomTouch : MonoBehaviour
 
     private void Start()
     {
-        horSize = GameField.GetComponent<FieldManger>().cellSize * GameManager.getInstance().FieldWidth;
-        vertSize = GameField.GetComponent<FieldManger>().cellSize * GameManager.getInstance().FieldHeight;
+        horSize = GameField.GetComponent<FieldManager>().cellSize * GameManager.getInstance().FieldWidth;
+        vertSize = GameField.GetComponent<FieldManager>().cellSize * GameManager.getInstance().FieldHeight;
     }
     void Update()
     {

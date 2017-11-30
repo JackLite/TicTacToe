@@ -7,13 +7,13 @@ public class WinnerChecker : MonoBehaviour
     private int horCellsCount;
     private int vertCellsCount;
     private int lineCount = 0;
-    private FieldManger fieldManager;
+    private FieldManager fieldManager;
     private int winLine;
 
     // Use this for initialization
     void Start()
     {
-        fieldManager = GetComponent<FieldManger>();
+        fieldManager = GetComponent<FieldManager>();
         horCellsCount = GameManager.Instance.FieldWidth;
         vertCellsCount = GameManager.Instance.FieldHeight;
         winLine = GameManager.Instance.WinLine;
@@ -42,12 +42,23 @@ public class WinnerChecker : MonoBehaviour
             showWinner(fieldState[last_hor, last_vert]);
             return true;
         }
+        else if(!fieldManager.isExistEmptyCells())
+        {
+            showWinner(CellController.State.empty);
+            return true;
+        }
         return false;
     }
     private void showWinner(CellController.State state)
     {
         SceneManager sceneManager = fieldManager.sceneManager.GetComponent<SceneManager>();
-        sceneManager.WinText.GetComponent<Text>().text = "Победили " + GameManager.getInstance().getWinnerName(state);
+        if(state == CellController.State.empty)
+        {
+            sceneManager.WinText.GetComponent<Text>().text = "Ничья!";
+        } else
+        {
+            sceneManager.WinText.GetComponent<Text>().text = "Победили " + GameManager.getInstance().getWinnerName(state);
+        }
         sceneManager.ShowWinner();
     }
     private bool checkHorizontal(int last_hor, int last_vert, CellController.State[,] fieldState)

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using System;
 using TrueGames;
 
-public class FieldManger : MonoBehaviour
+public class FieldManager : MonoBehaviour
 {
     #region newPublic
     [SerializeField] GameObject cellPrefab;
@@ -104,5 +104,23 @@ public class FieldManger : MonoBehaviour
     public void updateFieldState(int hor, int vert, CellController cellController)
     {
         fieldState[hor, vert] = cellController.currentState;
+    }
+
+    public bool isExistEmptyCells()
+    {
+        int hor = horCellsCount - 1;
+        int vert = vertCellsCount - 1;
+        for (; hor >= 0; hor--)
+        {
+            for (; vert >= 0; vert--)
+            {
+                if(fieldState[hor, vert] == CellController.State.empty)
+                {
+                    return true;
+                }
+            }
+            vert = vertCellsCount - 1;
+        }
+        return false;
     }
 }

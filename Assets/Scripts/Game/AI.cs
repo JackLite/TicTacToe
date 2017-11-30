@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class AI : MonoBehaviour
 {
-    private FieldManger fieldManager;
+    private FieldManager fieldManager;
     private WinnerChecker winChecker;
 
     public CellController.State side;
@@ -15,7 +15,7 @@ public class AI : MonoBehaviour
 
     public void Start()
     {
-        fieldManager = GameField.GetComponent<FieldManger>();
+        fieldManager = GameField.GetComponent<FieldManager>();
         winChecker = fieldManager.GetComponent<WinnerChecker>();
     }
     public void nextMove()
