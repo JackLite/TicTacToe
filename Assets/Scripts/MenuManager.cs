@@ -22,12 +22,21 @@ public class MenuManager : MonoBehaviour
     [SerializeField] public GameObject Autors;
     [SerializeField] public GameObject OptionsBackBtn;
     [SerializeField] public GameObject OptionsStartBtn;
+    [SerializeField] public GameObject ResumeGameBtn;
 
     private void Awake()
     { 
         MainMenu.GetComponent<VerticalLayoutGroup>().spacing = Screen.height * .05f;
         preGameOptionsManager = GetComponent<PreGameOptionsManager>();
         optionsManager = GetComponent<OptionsManager>();
+        if(GameData.Instance.isExistGame)
+        {
+            ResumeGameBtn.SetActive(true);
+        }
+        else
+        {
+            ResumeGameBtn.SetActive(false);
+        }
     }
     public void ShowOptions(bool isStartGame)
     {
@@ -55,9 +64,14 @@ public class MenuManager : MonoBehaviour
         Autors.SetActive(false);
         MainMenu.SetActive(true);
     }
-
+    public void resumeGame()
+    {
+        GameManager.Instance.isResumeGame = true;
+        GameManager.Instance.StartGame();
+    }
     public void StartGame()
     {
+        GameManager.Instance.isResumeGame = false;
         preGameOptionsManager.setParams();
         optionsManager.setParams();
         GameManager.getInstance().StartGame();

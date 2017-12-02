@@ -51,7 +51,7 @@ public class CellController : MonoBehaviour
 
     public void clickHandler(BaseEventData eventData)
     {
-        if(!choosen)
+        if(!choosen && currentState == State.empty)
         {
             resetChoosen();
             setChoosen();
@@ -79,8 +79,14 @@ public class CellController : MonoBehaviour
         innerImage.sprite = sceneManager.getSprite(state);
         currentState = state;
         fieldManager.lastState = state;
+        GameData.Instance.lastState = state;
         fieldManager.updateFieldState(hor_number, vert_number, this);
-        fieldManager.gameObject.GetComponent<WinnerChecker>().checkWinner(hor_number, vert_number, fieldManager.fieldState);
+        bool isEndGame = fieldManager.gameObject.GetComponent<WinnerChecker>().checkWinner(hor_number, vert_number, fieldManager.fieldState);
+        if(isEndGame)
+        {
+            GameData.Instance.isExistGame = false;
+            GameManager.Instance.GetComponent<DataManager>().SaveGameData();
+        }
     }
 
     private void setChoosen()

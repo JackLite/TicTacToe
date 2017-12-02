@@ -10,6 +10,13 @@ public class PreGameOptionsManager : MonoBehaviour {
     [SerializeField] GameObject SliderHeight;
     [SerializeField] GameObject SliderWinScore;
 
+    private void Start()
+    {
+        SliderWidth.GetComponent<Slider>().value = GameData.Instance.fieldWidth;
+        SliderHeight.GetComponent<Slider>().value = GameData.Instance.fieldHeight;
+        SliderWinScore.GetComponent<Slider>().value = GameData.Instance.winLine;
+    }
+
     public void changeWidthText(float width)
     {
         GetComponent<Text>().text = "Ширина поля: " + width;
@@ -27,8 +34,9 @@ public class PreGameOptionsManager : MonoBehaviour {
 
     public void setParams()
     {
-        GameManager.getInstance().FieldWidth = Mathf.RoundToInt(SliderWidth.GetComponent<Slider>().value);
-        GameManager.getInstance().FieldHeight = Mathf.RoundToInt(SliderHeight.GetComponent<Slider>().value);
-        GameManager.getInstance().WinLine = Mathf.RoundToInt(SliderWinScore.GetComponent<Slider>().value);
+        GameData.Instance.fieldWidth = Mathf.RoundToInt(SliderWidth.GetComponent<Slider>().value);
+        GameData.Instance.fieldHeight = Mathf.RoundToInt(SliderHeight.GetComponent<Slider>().value);
+        GameData.Instance.winLine = Mathf.RoundToInt(SliderWinScore.GetComponent<Slider>().value);
+        GameManager.Instance.GetComponent<DataManager>().SaveGameData();
     }
 } 

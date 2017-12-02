@@ -2,58 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
 
     #region private var
-    private int _fieldWidth = 9;
-    private int _fieldHeight = 9;
-    private int _winLine = 3;
     private Side cross;
     private Side zero;
     #endregion
 
-    
-    
-    #region props
-    public int FieldWidth
-    {
-        get
-        {
-            return _fieldWidth;
-        }
-        set
-        {
-            _fieldWidth = Mathf.Clamp(value, 3, 10);
-        }
-    }
-    public int FieldHeight
-    {
-        get
-        {
-            return _fieldHeight;
-        }
-        set
-        {
-            _fieldHeight = Mathf.Clamp(value, 3, 10);
-        }
-    }
-    public int WinLine
-    {
-        get
-        {
-            return _winLine;
-        }
-        set
-        {
-            _winLine = Mathf.Clamp(value, 3, 9);
-        }
-    }
-    #endregion
-
     public string gameSceneName = "Game";
     public string menuSceneName = "Menu";
+
+
+    public bool isResumeGame = false;
+    public bool isExistGame;
 
     private void Awake()
     {
@@ -71,7 +35,7 @@ public class GameManager : MonoBehaviour
         zero.code = "zero";
         zero.name = "нолики";
     }
-    
+
     public static GameManager Instance
     {
         get
@@ -89,6 +53,7 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene(gameSceneName);
+        GameData.Instance.isExistGame = true;
     }
 
     public void ExitToMenu()
@@ -98,11 +63,11 @@ public class GameManager : MonoBehaviour
 
     public string getWinnerName(CellController.State state)
     {
-        if(state == CellController.State.cross)
+        if (state == CellController.State.cross)
         {
             return cross.name;
         }
-        else if(state == CellController.State.zero)
+        else if (state == CellController.State.zero)
         {
             return zero.name;
         }

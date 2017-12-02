@@ -13,6 +13,7 @@ namespace TrueGames
         [SerializeField] public Sprite cross;
         [SerializeField] public Sprite zero;
         [SerializeField] public GameObject AI;
+        [SerializeField] public GameObject GameField;
         [SerializeField] public GameObject GameScreen;
         [SerializeField] public GameObject EndGameScreen;
         [SerializeField] public GameObject WinText;
@@ -40,9 +41,13 @@ namespace TrueGames
             {
                 return cross;
             }
-            else
+            else if(state == CellController.State.zero)
             {
                 return zero;
+            }
+            else
+            {
+                return new Sprite();
             }
         }
 

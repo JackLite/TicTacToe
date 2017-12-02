@@ -28,8 +28,8 @@ public class FieldManager : MonoBehaviour
     }
     private void Awake()
     {
-        horCellsCount = GameManager.Instance.FieldWidth;
-        vertCellsCount = GameManager.Instance.FieldHeight;
+        horCellsCount = GameData.Instance.fieldWidth;
+        vertCellsCount = GameData.Instance.fieldHeight;
     }
     public List<CellController> getFreeCells()
     {
@@ -49,8 +49,17 @@ public class FieldManager : MonoBehaviour
 
     void Start()
     {
-        lastState = CellController.State.zero;
-        fieldState = new CellController.State[horCellsCount, vertCellsCount];
+        if(GameManager.Instance.isResumeGame)
+        {
+            lastState = GameData.Instance.lastState;
+            fieldState = GameData.Instance.fieldState;
+        }
+        else
+        {
+            lastState = CellController.State.zero;
+            fieldState = new CellController.State[horCellsCount, vertCellsCount];
+        }
+        
         RectTransform rect = GetComponent<RectTransform>();
         rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, horCellsCount * cellSize);
         rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, vertCellsCount * cellSize);
@@ -85,7 +94,21 @@ public class FieldManager : MonoBehaviour
                 cellController.fieldManager = this;
                 cellController.hor_number = hor;
                 cellController.vert_number = vert;
-                fieldState[hor, vert] = CellController.State.empty;
+                if(GameManager.Instance.isResumeGame)
+                {
+                    fieldState[hor, vert] = GameData.Instance.fieldState[hor, vert];
+                    if(fieldState[hor, vert] != CellController.State.empty)
+                    {
+                        Image innerImage = cellController.transform.Find(CellController.childName).GetComponent<Image>();
+                        innerImage.color = new Color(0, 0, 0, 255);
+                        innerImage.sprite = sceneManager.GetComponent<SceneManager>().getSprite(fieldState[hor, vert]);
+                        cellController.currentState = fieldState[hor, vert];
+                    }
+                }
+                else
+                {
+                    fieldState[hor, vert] = CellController.State.empty;
+                }
             }
             vert = vertCellsCount - 1;
         }
@@ -104,6 +127,8 @@ public class FieldManager : MonoBehaviour
     public void updateFieldState(int hor, int vert, CellController cellController)
     {
         fieldState[hor, vert] = cellController.currentState;
+        GameData.Instance.fieldState = fieldState;
+        GameManager.Instance.GetComponent<DataManager>().SaveGameData();
     }
 
     public bool isExistEmptyCells()

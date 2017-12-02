@@ -14,9 +14,9 @@ public class WinnerChecker : MonoBehaviour
     void Start()
     {
         fieldManager = GetComponent<FieldManager>();
-        horCellsCount = GameManager.Instance.FieldWidth;
-        vertCellsCount = GameManager.Instance.FieldHeight;
-        winLine = GameManager.Instance.WinLine;
+        horCellsCount = GameData.Instance.fieldWidth;
+        vertCellsCount = GameData.Instance.fieldHeight;
+        winLine = GameData.Instance.winLine;
     }
 
     // Update is called once per frame

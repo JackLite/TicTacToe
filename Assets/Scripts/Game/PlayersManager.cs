@@ -20,11 +20,11 @@ public class PlayersManager : MonoBehaviour {
     {
         if(state == CellController.State.cross)
         {
-            return playerOneName;
+            return GameData.Instance.playersName[0];
         }
         else if(state == CellController.State.zero)
         {
-            return playerTwoName;
+            return GameData.Instance.playersName[1];
         }
         else
         {
