@@ -12,6 +12,9 @@ public class GameData
     public CellController.State[,] fieldState;
     public CellController.State lastState;
     public bool isExistGame = false;
+    public float zoom = 1f;
+    public float positionX = 0f;
+    public float positionY = 0f;
 
     public static GameData Instance
     {

@@ -9,7 +9,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public class DataManager : MonoBehaviour {
 
-    private string playersFileName = "/players.data";
+    private string playersFileName = "/game.data";
     private string playersFilePath;
 
     private void Awake()
@@ -21,12 +21,20 @@ public class DataManager : MonoBehaviour {
     {
         if(!File.Exists(Application.persistentDataPath + playersFileName))
         {
-            return GameData.Instance;
+            return new GameData();
         }
-        IFormatter formatter = new BinaryFormatter();
-        FileStream buffer = File.OpenRead(Application.persistentDataPath + playersFileName);
-        GameData savedData = formatter.Deserialize(buffer) as GameData;
-        buffer.Close();
+        GameData savedData;
+        try
+        {
+            IFormatter formatter = new BinaryFormatter();
+            FileStream buffer = File.OpenRead(Application.persistentDataPath + playersFileName);
+            savedData = formatter.Deserialize(buffer) as GameData;
+            buffer.Close();
+        } catch (EndOfStreamException e)
+        {
+            Debug.Log(e.Message);
+            savedData = new GameData();
+        }
         return savedData;
     } 
 

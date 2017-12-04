@@ -110,6 +110,7 @@ public class FieldManager : MonoBehaviour
                     fieldState[hor, vert] = CellController.State.empty;
                 }
             }
+            GameData.Instance.fieldState = fieldState;
             vert = vertCellsCount - 1;
         }
     }

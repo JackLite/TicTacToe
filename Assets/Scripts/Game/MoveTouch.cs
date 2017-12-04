@@ -13,7 +13,10 @@ public class MoveTouch : MonoBehaviour
 
     void Start()
     {
-
+        if (GameManager.Instance.isResumeGame)
+        {
+            GameField.GetComponent<RectTransform>().localPosition = new Vector3(GameData.Instance.positionX, GameData.Instance.positionY);
+        }
     }
 
     // Update is called once per frame
@@ -27,7 +30,10 @@ public class MoveTouch : MonoBehaviour
             float vertDelta = curPos.y - prevPos.y;
             float newHorPos = GameField.GetComponent<RectTransform>().localPosition.x + horDelta * speedMove * Time.deltaTime;
             float newVertPos = GameField.GetComponent<RectTransform>().localPosition.y + vertDelta * speedMove * Time.deltaTime;
-            GameField.GetComponent<RectTransform>().localPosition = new Vector3(newHorPos, newVertPos);
+            Vector3 newPos = new Vector3(newHorPos, newVertPos);
+            GameField.GetComponent<RectTransform>().localPosition = newPos;
+            GameData.Instance.positionX = newHorPos;
+            GameData.Instance.positionY = newVertPos;
         }
     }
 }

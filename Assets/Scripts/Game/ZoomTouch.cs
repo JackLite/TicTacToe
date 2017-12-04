@@ -18,6 +18,11 @@ public class ZoomTouch : MonoBehaviour
     {
         horSize = GameField.GetComponent<FieldManager>().cellSize * GameData.Instance.fieldWidth;
         vertSize = GameField.GetComponent<FieldManager>().cellSize * GameData.Instance.fieldHeight;
+        if(GameManager.Instance.isResumeGame)
+        {
+            currentZoom = GameData.Instance.zoom;
+            GameField.GetComponent<RectTransform>().localScale = new Vector3(currentZoom, currentZoom, 1);
+        }
     }
     void Update()
     {
@@ -31,6 +36,7 @@ public class ZoomTouch : MonoBehaviour
             float dist = (touchZero.position - touchOne.position).magnitude;
             currentZoom = currentZoom + (dist - prevDist)/dist * speedZoom;
             currentZoom = Mathf.Clamp(currentZoom, minZoom, maxZoom);
+            GameData.Instance.zoom = currentZoom;
             GameField.GetComponent<RectTransform>().localScale = new Vector3(currentZoom, currentZoom, 1);
         }
     }
