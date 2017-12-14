@@ -16,6 +16,7 @@ namespace TrueGames
         [SerializeField] public GameObject GameField;
         [SerializeField] public GameObject GameScreen;
         [SerializeField] public GameObject EndGameScreen;
+        [SerializeField] public GameObject WinTitleText;
         [SerializeField] public GameObject WinText;
 
         public GameObject LastCell

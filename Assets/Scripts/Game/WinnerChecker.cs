@@ -54,10 +54,11 @@ public class WinnerChecker : MonoBehaviour
         SceneManager sceneManager = fieldManager.sceneManager.GetComponent<SceneManager>();
         if(state == CellController.State.empty)
         {
+            sceneManager.WinTitleText.SetActive(false);
             sceneManager.WinText.GetComponent<Text>().text = "Ничья!";
         } else
         {
-            sceneManager.WinText.GetComponent<Text>().text = "Победили " + GameManager.getInstance().getWinnerName(state);
+            sceneManager.WinText.GetComponent<Text>().text = GameManager.getInstance().getWinnerName(state);
         }
         sceneManager.ShowWinner();
     }

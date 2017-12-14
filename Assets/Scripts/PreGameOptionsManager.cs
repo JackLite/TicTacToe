@@ -19,6 +19,9 @@ public class PreGameOptionsManager : MonoBehaviour {
         SliderWidth.GetComponent<Slider>().value = GameData.Instance.fieldWidth;
         SliderHeight.GetComponent<Slider>().value = GameData.Instance.fieldHeight;
         SliderWinScore.GetComponent<Slider>().value = GameData.Instance.winLine;
+        changeWidthText(GameData.Instance.fieldWidth);
+        changeHeightText(GameData.Instance.fieldHeight);
+        changeWinLine(GameData.Instance.winLine);
     }
 
     public void changeWidthText(float width)

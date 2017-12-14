@@ -65,11 +65,11 @@ public class GameManager : MonoBehaviour
     {
         if (state == CellController.State.cross)
         {
-            return cross.name;
+            return GameData.Instance.playersName[0];
         }
         else if (state == CellController.State.zero)
         {
-            return zero.name;
+            return GameData.Instance.playersName[1];
         }
         else
         {
