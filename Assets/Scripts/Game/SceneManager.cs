@@ -52,6 +52,14 @@ namespace TrueGames
             }
         }
 
+        private void Start()
+        {
+            if(!GameManager.Instance)
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene(GameManager.startSceneName);
+            }
+        }
+
         public void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape))

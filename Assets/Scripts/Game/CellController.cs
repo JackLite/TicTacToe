@@ -10,7 +10,7 @@ public class CellController : MonoBehaviour
     private AI AI;
     private bool choosen = false;
 
-    public const string childName = "inner"; 
+    public const string childName = "inner";
 
     public int hor_number { get; set; }
     public int vert_number { get; set; }
@@ -40,7 +40,7 @@ public class CellController : MonoBehaviour
             choosen = value;
         }
     }
-   
+
 
     public State currentState = State.empty;
 
@@ -51,23 +51,20 @@ public class CellController : MonoBehaviour
 
     public void clickHandler(BaseEventData eventData)
     {
-        if(!choosen && currentState == State.empty)
+        if (currentState != State.empty)
         {
-            resetChoosen();
-            setChoosen();
+            return;
         }
-        else if (currentState == State.empty)
+        sceneManager.GetComponent<TextMoveController>().changeWhoMove(fieldManager.lastState);
+        if (fieldManager.lastState == State.zero)
         {
-            sceneManager.gameObject.GetComponent<TextMoveController>().changeWhoMove(fieldManager.lastState);
-            if (fieldManager.lastState == State.zero)
-            {
-                setState(State.cross);
-            }
-            else
-            {
-                setState(State.zero);
-            }
+            setState(State.cross);
         }
+        else
+        {
+            setState(State.zero);
+        }
+
         // пока ИИ не делаем
         //AI.nextMove();
     }
@@ -82,23 +79,10 @@ public class CellController : MonoBehaviour
         GameData.Instance.lastState = state;
         fieldManager.updateFieldState(hor_number, vert_number, this);
         bool isEndGame = fieldManager.gameObject.GetComponent<WinnerChecker>().checkWinner(hor_number, vert_number, fieldManager.fieldState);
-        if(isEndGame)
+        if (isEndGame)
         {
             GameData.Instance.isExistGame = false;
             GameManager.Instance.GetComponent<DataManager>().SaveGameData();
         }
-    }
-
-    private void setChoosen()
-    {
-        sceneManager.GetComponent<SceneManager>().LastCell = gameObject;
-        choosen = true;
-        Image innerImage = transform.Find(childName).GetComponent<Image>();
-        innerImage.color = choosenColor;
-    }
-
-    private void resetChoosen()
-    {
-        sceneManager.GetComponent<SceneManager>().resetLastCell();
     }
 }

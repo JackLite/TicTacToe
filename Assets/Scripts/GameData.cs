@@ -6,9 +6,9 @@ using UnityEngine;
 public class GameData
 {
     public string[] playersName = new string[2];
-    public int fieldWidth;
-    public int fieldHeight;
-    public int winLine;
+    public int fieldWidth = 3;
+    public int fieldHeight = 3;
+    public int winLine = 3;
     public CellController.State[,] fieldState;
     public CellController.State lastState;
     public bool isExistGame = false;

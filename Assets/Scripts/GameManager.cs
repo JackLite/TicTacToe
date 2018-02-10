@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     private Side zero;
     #endregion
 
+    public const string startSceneName = "Menu";
+
     public string gameSceneName = "Game";
     public string menuSceneName = "Menu";
 

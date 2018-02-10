@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using TrueGames; 
+using TrueGames;
 
 public class WinnerChecker : MonoBehaviour
 {
@@ -26,7 +26,7 @@ public class WinnerChecker : MonoBehaviour
     }
     public bool checkWinner(int last_hor, int last_vert, CellController.State[,] fieldState)
     {
-        
+
         if (checkHorizontal(last_hor, last_vert, fieldState))
         {
             showWinner(fieldState[last_hor, last_vert]);
@@ -42,7 +42,7 @@ public class WinnerChecker : MonoBehaviour
             showWinner(fieldState[last_hor, last_vert]);
             return true;
         }
-        else if(!fieldManager.isExistEmptyCells())
+        else if (!fieldManager.isExistEmptyCells())
         {
             showWinner(CellController.State.empty);
             return true;
@@ -52,11 +52,12 @@ public class WinnerChecker : MonoBehaviour
     private void showWinner(CellController.State state)
     {
         SceneManager sceneManager = fieldManager.sceneManager.GetComponent<SceneManager>();
-        if(state == CellController.State.empty)
+        if (state == CellController.State.empty)
         {
             sceneManager.WinTitleText.SetActive(false);
             sceneManager.WinText.GetComponent<Text>().text = "Ничья!";
-        } else
+        }
+        else
         {
             sceneManager.WinText.GetComponent<Text>().text = GameManager.getInstance().getWinnerName(state);
         }
@@ -73,6 +74,10 @@ public class WinnerChecker : MonoBehaviour
             {
                 lineCount++;
             }
+            else
+            {
+                break;
+            }
         }
         hor_pos = last_hor;
         while (hor_pos > 0)
@@ -82,6 +87,10 @@ public class WinnerChecker : MonoBehaviour
             if (state == fieldManager.lastState)
             {
                 lineCount++;
+            }
+            else
+            {
+                break;
             }
         }
         if (lineCount == winLine - 1)
@@ -105,6 +114,10 @@ public class WinnerChecker : MonoBehaviour
             {
                 lineCount++;
             }
+            else
+            {
+                break;
+            }
         }
         vert = vert_pos;
         while (vert > 0)
@@ -114,6 +127,10 @@ public class WinnerChecker : MonoBehaviour
             if (state == fieldManager.lastState)
             {
                 lineCount++;
+            }
+            else
+            {
+                break;
             }
         }
         if (lineCount == winLine - 1)
@@ -154,6 +171,10 @@ public class WinnerChecker : MonoBehaviour
             {
                 lineCount++;
             }
+            else
+            {
+                break;
+            }
         }
         hor = hor_pos;
         vert = vert_pos;
@@ -165,6 +186,10 @@ public class WinnerChecker : MonoBehaviour
             if (state == fieldManager.lastState)
             {
                 lineCount++;
+            }
+            else
+            {
+                break;
             }
         }
         if (lineCount == winLine - 1)
@@ -190,6 +215,10 @@ public class WinnerChecker : MonoBehaviour
             {
                 lineCount++;
             }
+            else
+            {
+                break;
+            }
         }
         hor = hor_pos;
         vert = vert_pos;
@@ -201,6 +230,10 @@ public class WinnerChecker : MonoBehaviour
             if (state == fieldManager.lastState)
             {
                 lineCount++;
+            }
+            else
+            {
+                break;
             }
         }
         if (lineCount == winLine - 1)

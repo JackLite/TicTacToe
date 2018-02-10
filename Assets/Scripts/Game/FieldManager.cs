@@ -19,7 +19,7 @@ public class FieldManager : MonoBehaviour
     [SerializeField] public GameObject sceneManager;
     private int horCellsCount;
     private int vertCellsCount;
-    public int cellSize = 100;
+    public float cellSize = 100f;
     public CellController.State lastState { get; set; }
     public CellController.State[,] fieldState
     {
@@ -61,6 +61,7 @@ public class FieldManager : MonoBehaviour
         }
         
         RectTransform rect = GetComponent<RectTransform>();
+        cellSize = Math.Min(rect.rect.width / horCellsCount, rect.rect.height / vertCellsCount);
         rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, horCellsCount * cellSize);
         rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, vertCellsCount * cellSize);
         rect.localPosition = new Vector2(0, 0);
