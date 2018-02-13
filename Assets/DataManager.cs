@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.IO;
-using System.Runtime.Serialization; 
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
-public class DataManager : MonoBehaviour {
+public class DataManager : MonoBehaviour
+{
 
     private string playersFileName = "/game.data";
     private string playersFilePath;
@@ -19,7 +20,7 @@ public class DataManager : MonoBehaviour {
 
     public GameData GetGameData()
     {
-        if(!File.Exists(Application.persistentDataPath + playersFileName))
+        if (!File.Exists(Application.persistentDataPath + playersFileName))
         {
             return new GameData();
         }
@@ -30,13 +31,14 @@ public class DataManager : MonoBehaviour {
             FileStream buffer = File.OpenRead(Application.persistentDataPath + playersFileName);
             savedData = formatter.Deserialize(buffer) as GameData;
             buffer.Close();
-        } catch (EndOfStreamException e)
+        }
+        catch (EndOfStreamException e)
         {
             Debug.Log(e.Message);
             savedData = new GameData();
         }
         return savedData;
-    } 
+    }
 
     public void SaveGameData()
     {
@@ -45,5 +47,5 @@ public class DataManager : MonoBehaviour {
         formatter.Serialize(buffer, GameData.Instance);
         buffer.Close();
     }
-	
+
 }

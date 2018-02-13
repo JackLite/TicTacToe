@@ -16,6 +16,8 @@ public class GameData
     public float positionX = 0f;
     public float positionY = 0f;
 
+
+
     public static GameData Instance
     {
         get
@@ -31,7 +33,7 @@ public class GameData
 
     public override string ToString()
     {
-        string str = "Имена игроков: " + playersName.ToString() + "; Рзамеры поля: " + fieldWidth + "x" + fieldHeight + "; Длина линни: " + winLine;
+        string str = "Имена игроков: " + playersName.ToString() + "; Размеры поля: " + fieldWidth + "x" + fieldHeight + "; Длина линни: " + winLine;
         str += "Предыдущая игра: " + Convert.ToInt16(isExistGame);
         return str;
     }
