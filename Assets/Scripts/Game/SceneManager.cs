@@ -48,7 +48,7 @@ namespace TrueGames
             }
             else
             {
-                return new Sprite();
+                return null;
             }
         }
 
