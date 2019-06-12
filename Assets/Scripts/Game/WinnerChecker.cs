@@ -14,16 +14,11 @@ public class WinnerChecker : MonoBehaviour
     void Start()
     {
         fieldManager = GetComponent<FieldManager>();
-        horCellsCount = GameData.Instance.fieldWidth;
-        vertCellsCount = GameData.Instance.fieldHeight;
-        winLine = GameData.Instance.winLine;
+        horCellsCount = GameData.Instance.fieldSettings.width;
+        vertCellsCount = GameData.Instance.fieldSettings.height;
+        winLine = GameData.Instance.fieldSettings.winLine;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     public bool checkWinner(int last_hor, int last_vert, CellController.State[,] fieldState)
     {
 

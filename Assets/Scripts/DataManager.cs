@@ -10,7 +10,12 @@ public class DataManager : MonoBehaviour {
     {
         if(!File.Exists(Application.persistentDataPath + PlayersFileName))
         {
-            return new GameData();
+            var gameData = new GameData
+            {
+                fieldSettings = new FieldSettings(3), 
+                playersName = new PlayersName("Игрок 1", "Игрок 2")
+            };
+            return gameData;
         }
         GameData savedData;
         try

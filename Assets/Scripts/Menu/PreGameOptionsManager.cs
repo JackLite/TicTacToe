@@ -19,16 +19,16 @@ namespace Menu
 
             SetSavedValue();
 
-            ChangeWidthText(GameData.Instance.fieldWidth);
-            ChangeHeightText(GameData.Instance.fieldHeight);
-            ChangeWinLine(GameData.Instance.winLine);
+            ChangeWidthText(GameData.Instance.fieldSettings.width);
+            ChangeHeightText(GameData.Instance.fieldSettings.height);
+            ChangeWinLine(GameData.Instance.fieldSettings.winLine);
         }
 
         private void SetSavedValue()
         {
-            sliderWidth.value = GameData.Instance.fieldWidth;
-            sliderHeight.value = GameData.Instance.fieldHeight;
-            sliderWinScore.value = GameData.Instance.winLine;
+            sliderWidth.value = GameData.Instance.fieldSettings.width;
+            sliderHeight.value = GameData.Instance.fieldSettings.height;
+            sliderWinScore.value = GameData.Instance.fieldSettings.winLine;
         }
 
         private void InitFields()
@@ -59,9 +59,9 @@ namespace Menu
 
         public void SetParams()
         {
-            GameData.Instance.fieldWidth = Mathf.RoundToInt(sliderWidth.value);
-            GameData.Instance.fieldHeight = Mathf.RoundToInt(sliderHeight.value);
-            GameData.Instance.winLine = Mathf.RoundToInt(sliderWinScore.value);
+            GameData.Instance.fieldSettings.width = Mathf.RoundToInt(sliderWidth.value);
+            GameData.Instance.fieldSettings.height = Mathf.RoundToInt(sliderHeight.value);
+            GameData.Instance.fieldSettings.winLine = Mathf.RoundToInt(sliderWinScore.value);
             DataManager.SaveGameData();
         }
     }

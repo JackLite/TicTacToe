@@ -28,8 +28,8 @@ public class FieldManager : MonoBehaviour
     }
     private void Awake()
     {
-        horCellsCount = GameData.Instance.fieldWidth;
-        vertCellsCount = GameData.Instance.fieldHeight;
+        horCellsCount = GameData.Instance.fieldSettings.width;
+        vertCellsCount = GameData.Instance.fieldSettings.height;
     }
     public List<CellController> getFreeCells()
     {
