@@ -73,7 +73,7 @@ public class CellController : MonoBehaviour
         if (isEndGame)
         {
             GameData.Instance.isExistGame = false;
-            GameManager.Instance.GetComponent<DataManager>().SaveGameData();
+            DataManager.SaveGameData();
         }
     }
 }

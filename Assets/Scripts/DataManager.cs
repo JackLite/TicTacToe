@@ -1,25 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+﻿using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization; 
 using System.Runtime.Serialization.Formatters.Binary;
 
 public class DataManager : MonoBehaviour {
+    private const string PlayersFileName = "/game.data";
 
-    private string playersFileName = "/game.data";
-    private string playersFilePath;
-
-    private void Awake()
+    public static GameData GetGameData()
     {
-        playersFilePath = Application.persistentDataPath + playersFileName;
-    }
-
-    public GameData GetGameData()
-    {
-        if(!File.Exists(Application.persistentDataPath + playersFileName))
+        if(!File.Exists(Application.persistentDataPath + PlayersFileName))
         {
             return new GameData();
         }
@@ -27,7 +16,7 @@ public class DataManager : MonoBehaviour {
         try
         {
             IFormatter formatter = new BinaryFormatter();
-            FileStream buffer = File.OpenRead(Application.persistentDataPath + playersFileName);
+            FileStream buffer = File.OpenRead(Application.persistentDataPath + PlayersFileName);
             savedData = formatter.Deserialize(buffer) as GameData;
             buffer.Close();
         } catch (EndOfStreamException e)
@@ -38,17 +27,17 @@ public class DataManager : MonoBehaviour {
         return savedData;
     } 
 
-    public void SaveGameData()
+    public static void SaveGameData()
     {
         IFormatter formatter = new BinaryFormatter();
-        FileStream buffer = File.Create(Application.persistentDataPath + playersFileName);
+        FileStream buffer = File.Create(Application.persistentDataPath + PlayersFileName);
         formatter.Serialize(buffer, GameData.Instance);
         buffer.Close();
     }
 
-    public void ClearGameData()
+    public static void ClearGameData()
     {
-        File.Delete(Application.persistentDataPath + playersFileName);
+        File.Delete(Application.persistentDataPath + PlayersFileName);
     }
 	
 }

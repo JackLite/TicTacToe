@@ -62,7 +62,7 @@ namespace Menu
             GameData.Instance.fieldWidth = Mathf.RoundToInt(sliderWidth.value);
             GameData.Instance.fieldHeight = Mathf.RoundToInt(sliderHeight.value);
             GameData.Instance.winLine = Mathf.RoundToInt(sliderWinScore.value);
-            GameManager.Instance.GetComponent<DataManager>().SaveGameData();
+            DataManager.SaveGameData();
         }
     }
 }

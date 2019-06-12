@@ -22,7 +22,7 @@ public class GameData
         {
             if (_instance == null)
             {
-                _instance = GameManager.Instance.GetComponent<DataManager>().GetGameData();
+                _instance = DataManager.GetGameData();
             }
 
             return _instance;

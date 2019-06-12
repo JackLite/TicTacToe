@@ -13,8 +13,7 @@ namespace Editor
 
             if (!isClicked) return;
 
-            var dataManager = target as DataManager;
-            if (dataManager != null) dataManager.ClearGameData();
+            DataManager.ClearGameData();
         }
     }
 }

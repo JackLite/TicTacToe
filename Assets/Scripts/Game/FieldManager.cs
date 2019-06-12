@@ -130,7 +130,7 @@ public class FieldManager : MonoBehaviour
     {
         fieldState[hor, vert] = cellController.currentState;
         GameData.Instance.fieldState = fieldState;
-        GameManager.Instance.GetComponent<DataManager>().SaveGameData();
+        DataManager.SaveGameData();
     }
 
     public bool isExistEmptyCells()

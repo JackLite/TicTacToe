@@ -34,7 +34,7 @@ namespace Menu
 
             GameData.Instance.playersName.first = playersManager.playerOneName;
             GameData.Instance.playersName.second = playersManager.playerTwoName;
-            GameManager.Instance.gameObject.GetComponent<DataManager>().SaveGameData();
+            DataManager.SaveGameData();
         }
     }
 }
