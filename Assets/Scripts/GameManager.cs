@@ -1,17 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private Side cross;
-    private Side zero;
-
-    private string gameSceneName = "Game";
-    private string menuSceneName = "Menu";
-
+    private const string GameName = "Game";
+    private const string MenuName = "Menu";
 
     public bool isResumeGame;
         
@@ -25,23 +17,18 @@ public class GameManager : MonoBehaviour
         Instance = this;
 
         DontDestroyOnLoad(gameObject);
-
-        cross.code = "cross";
-        cross.name = "крестики";
-        zero.code = "zero";
-        zero.name = "нолики";
     }
 
     public static GameManager Instance { get; private set; }
 
-    public string MenuSceneName
+    public static string MenuSceneName
     {
-        get { return menuSceneName; }
+        get { return MenuName; }
     }
 
-    public string GameSceneName
+    public static string GameSceneName
     {
-        get { return gameSceneName; }
+        get { return GameName; }
     }
 
     public static GameManager GetInstance()

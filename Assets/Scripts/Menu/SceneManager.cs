@@ -24,7 +24,7 @@ namespace Menu
 
         private static void LoadGameScene()
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(GameManager.Instance.GameSceneName);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(GameManager.GameSceneName);
             GameData.Instance.isExistGame = true;
         }
     }

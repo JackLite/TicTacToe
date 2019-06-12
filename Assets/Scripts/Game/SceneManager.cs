@@ -43,7 +43,7 @@ namespace TrueGames
         {
             if(!GameManager.Instance)
             {
-                UnityEngine.SceneManagement.SceneManager.LoadScene(GameManager.Instance.GameSceneName);
+                UnityEngine.SceneManagement.SceneManager.LoadScene(GameManager.GameSceneName);
             }
         }
 
@@ -63,7 +63,7 @@ namespace TrueGames
 
         private static void ReturnToMenu()
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(GameManager.Instance.MenuSceneName);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(GameManager.MenuSceneName);
         }
 
         public void resetLastCell()
