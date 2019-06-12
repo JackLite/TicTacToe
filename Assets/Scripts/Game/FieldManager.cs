@@ -9,11 +9,8 @@ using TrueGames;
 
 public class FieldManager : MonoBehaviour
 {
-    #region newPublic
-    [SerializeField] GameObject cellPrefab;
-    #endregion
-
-
+    [SerializeField] 
+    private GameObject cellPrefab;
     private GameObject[] cells;
 
     [SerializeField] public GameObject sceneManager;
@@ -31,23 +28,8 @@ public class FieldManager : MonoBehaviour
         horCellsCount = GameData.Instance.fieldSettings.width;
         vertCellsCount = GameData.Instance.fieldSettings.height;
     }
-    public List<CellController> getFreeCells()
-    {
-        int count = 0;
-        List<CellController> freeCells = new List<CellController>();
-        foreach(Transform cell in transform)
-        {
-            CellController cellController = cell.gameObject.GetComponent<CellController>();
-            if (cellController.currentState == CellController.State.empty)
-            {
-                freeCells.Add(cellController);
-                count++;
-            }
-        }
-        return freeCells;
-    }
 
-    void Start()
+    private void Start()
     {
         if(GameManager.Instance.isResumeGame)
         {
@@ -71,7 +53,6 @@ public class FieldManager : MonoBehaviour
     public void initCells()
     {
         addCells();
-        addCellOnclick();
     }
     private void addCells()
     {
@@ -115,17 +96,7 @@ public class FieldManager : MonoBehaviour
             vert = vertCellsCount - 1;
         }
     }
-    private void addCellOnclick()
-    {
-        foreach (Transform child in transform)
-        {
-            EventTrigger eventTrigger = child.gameObject.AddComponent<EventTrigger>();
-            EventTrigger.Entry eventEntry = new EventTrigger.Entry();
-            eventEntry.eventID = EventTriggerType.PointerClick;
-            eventEntry.callback.AddListener(new UnityAction<BaseEventData>(child.gameObject.GetComponent<CellController>().clickHandler));
-            eventTrigger.triggers.Add(eventEntry);
-        }
-    }
+
     public void updateFieldState(int hor, int vert, CellController cellController)
     {
         fieldState[hor, vert] = cellController.currentState;

@@ -76,4 +76,12 @@ public class CellController : MonoBehaviour
             DataManager.SaveGameData();
         }
     }
+
+    private void Start()
+    {
+        var eventTrigger = GetComponent<EventTrigger>();
+        var eventEntry = new EventTrigger.Entry {eventID = EventTriggerType.PointerClick};
+        eventEntry.callback.AddListener(clickHandler);
+        eventTrigger.triggers.Add(eventEntry);
+    }
 }
