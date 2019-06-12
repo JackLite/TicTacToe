@@ -6,29 +6,23 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-
-    #region private var
     private Side cross;
     private Side zero;
-    #endregion
 
-    public const string startSceneName = "Menu";
-
-    public string gameSceneName = "Game";
-    public string menuSceneName = "Menu";
+    private string gameSceneName = "Game";
+    private string menuSceneName = "Menu";
 
 
-    public bool isResumeGame = false;
-    public bool isExistGame;
-
+    public bool isResumeGame;
+        
     private void Awake()
     {
-        if (instance)
+        if (Instance)
         {
             DestroyImmediate(gameObject);
             return;
         }
-        instance = this;
+        Instance = this;
 
         DontDestroyOnLoad(gameObject);
 
@@ -38,44 +32,35 @@ public class GameManager : MonoBehaviour
         zero.name = "нолики";
     }
 
-    public static GameManager Instance
-    {
-        get
-        {
-            return instance;
-        }
-    }
-    private static GameManager instance = null;
+    public static GameManager Instance { get; private set; }
 
-    public static GameManager getInstance()
+    public string MenuSceneName
     {
-        return instance;
+        get { return menuSceneName; }
     }
 
-    public void StartGame()
+    public string GameSceneName
     {
-        SceneManager.LoadScene(gameSceneName);
-        GameData.Instance.isExistGame = true;
+        get { return gameSceneName; }
     }
 
-    public void ExitToMenu()
+    public static GameManager GetInstance()
     {
-        SceneManager.LoadScene(menuSceneName);
+        return Instance;
     }
-
-    public string getWinnerName(CellController.State state)
+    
+    public static string GetWinnerName(CellController.State state)
     {
-        if (state == CellController.State.cross)
+        switch (state)
         {
-            return GameData.Instance.playersName.first;
-        }
-        else if (state == CellController.State.zero)
-        {
-            return GameData.Instance.playersName.second;
-        }
-        else
-        {
-            throw new System.Exception("Передано неверное состояние");
+            case CellController.State.cross:
+                return GameData.Instance.playersName.first;
+            case CellController.State.zero:
+                return GameData.Instance.playersName.second;
+            case CellController.State.empty:
+                throw new System.Exception("Передано неверное состояние");
+            default:
+                throw new System.Exception("Передано неверное состояние");
         }
     }
 }

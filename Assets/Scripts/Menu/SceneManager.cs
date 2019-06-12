@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Menu
 {
@@ -12,13 +13,19 @@ namespace Menu
         {
             GameManager.Instance.isResumeGame = false;
             preGameOptionsManager.SetParams();
-            GameManager.getInstance().StartGame();
+            LoadGameScene();
         }
 
-        public void ResumeGame()
+        public void ContinueGame()
         {
             GameManager.Instance.isResumeGame = true;
-            GameManager.Instance.StartGame();
+            LoadGameScene();
+        }
+
+        private static void LoadGameScene()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(GameManager.Instance.GameSceneName);
+            GameData.Instance.isExistGame = true;
         }
     }
 }

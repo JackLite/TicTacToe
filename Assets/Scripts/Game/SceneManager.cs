@@ -43,7 +43,7 @@ namespace TrueGames
         {
             if(!GameManager.Instance)
             {
-                UnityEngine.SceneManagement.SceneManager.LoadScene(GameManager.startSceneName);
+                UnityEngine.SceneManagement.SceneManager.LoadScene(GameManager.Instance.GameSceneName);
             }
         }
 
@@ -51,7 +51,7 @@ namespace TrueGames
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                GameManager.getInstance().ExitToMenu();
+                ReturnToMenu();
             }
         }
 
@@ -61,9 +61,9 @@ namespace TrueGames
             EndGameScreen.SetActive(true);
         }
 
-        public void returnToMenu()
+        private static void ReturnToMenu()
         {
-            GameManager.getInstance().ExitToMenu();
+            UnityEngine.SceneManagement.SceneManager.LoadScene(GameManager.Instance.MenuSceneName);
         }
 
         public void resetLastCell()

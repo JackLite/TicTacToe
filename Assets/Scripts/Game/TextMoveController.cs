@@ -28,7 +28,7 @@ public class TextMoveController : MonoBehaviour {
 
     public void changeWhoMove(CellController.State state)
     {
-        string text = GameManager.getInstance().GetComponent<PlayersManager>().getWhoMoveNick(state);
+        string text = GameManager.GetInstance().GetComponent<PlayersManager>().getWhoMoveNick(state);
         WhoMoveText.GetComponent<Text>().text = text;
     }
 }

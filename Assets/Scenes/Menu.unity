@@ -469,7 +469,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameSceneName: Game
-  menuSceneName: Menu
   isResumeGame: 0
   isExistGame: 0
 --- !u!4 &467395376
@@ -2561,7 +2560,7 @@ PrefabInstance:
     - target: {fileID: 114411756277970854, guid: 08286cd9412ff8a4f9ee82171e1ac044,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ResumeGame
+      value: ContinueGame
       objectReference: {fileID: 0}
     - target: {fileID: 114411756277970854, guid: 08286cd9412ff8a4f9ee82171e1ac044,
         type: 3}

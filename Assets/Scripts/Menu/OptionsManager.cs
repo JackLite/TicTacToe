@@ -28,7 +28,7 @@ namespace Menu
 
         private void SaveOptions()
         {
-            var playersManager = GameManager.getInstance().gameObject.GetComponent<PlayersManager>();
+            var playersManager = GameManager.GetInstance().gameObject.GetComponent<PlayersManager>();
             playersManager.playerOneName = playerOneNickField.text;
             playersManager.playerTwoName = playerTwoNickField.text;
 

@@ -59,7 +59,7 @@ public class WinnerChecker : MonoBehaviour
         }
         else
         {
-            sceneManager.WinText.GetComponent<Text>().text = GameManager.getInstance().getWinnerName(state);
+            sceneManager.WinText.GetComponent<Text>().text = GameManager.GetWinnerName(state);
         }
         sceneManager.ShowWinner();
     }
