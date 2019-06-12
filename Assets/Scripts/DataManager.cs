@@ -45,5 +45,10 @@ public class DataManager : MonoBehaviour {
         formatter.Serialize(buffer, GameData.Instance);
         buffer.Close();
     }
+
+    public void ClearGameData()
+    {
+        File.Delete(Application.persistentDataPath + playersFileName);
+    }
 	
 }

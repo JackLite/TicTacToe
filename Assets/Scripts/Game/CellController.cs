@@ -7,7 +7,6 @@ using TrueGames;
 
 public class CellController : MonoBehaviour
 {
-    private AI AI;
     private bool choosen = false;
 
     public const string childName = "inner";
@@ -44,11 +43,6 @@ public class CellController : MonoBehaviour
 
     public State currentState = State.empty;
 
-    public void Start()
-    {
-        AI = sceneManager.AI.GetComponent<AI>();
-    }
-
     public void clickHandler(BaseEventData eventData)
     {
         if (currentState != State.empty)
@@ -64,9 +58,6 @@ public class CellController : MonoBehaviour
         {
             setState(State.zero);
         }
-
-        // пока ИИ не делаем
-        //AI.nextMove();
     }
 
     public void setState(State state)

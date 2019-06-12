@@ -67,11 +67,11 @@ public class GameManager : MonoBehaviour
     {
         if (state == CellController.State.cross)
         {
-            return GameData.Instance.playersName[0];
+            return GameData.Instance.playersName.first;
         }
         else if (state == CellController.State.zero)
         {
-            return GameData.Instance.playersName[1];
+            return GameData.Instance.playersName.second;
         }
         else
         {

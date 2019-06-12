@@ -7,29 +7,16 @@ namespace TrueGames
 {
     public class SceneManager : MonoBehaviour
     {
-        private GameObject lastCell;
-
         [SerializeField] public Sprite cell;
         [SerializeField] public Sprite cross;
         [SerializeField] public Sprite zero;
-        [SerializeField] public GameObject AI;
         [SerializeField] public GameObject GameField;
         [SerializeField] public GameObject GameScreen;
         [SerializeField] public GameObject EndGameScreen;
         [SerializeField] public GameObject WinTitleText;
         [SerializeField] public GameObject WinText;
 
-        public GameObject LastCell
-        {
-            get
-            {
-                return lastCell;
-            }
-            set
-            {
-                lastCell = value;
-            }
-        }
+        public GameObject LastCell { get; set; }
 
         public Sprite getCell()
         {
@@ -48,7 +35,7 @@ namespace TrueGames
             }
             else
             {
-                return new Sprite();
+                return null;
             }
         }
 

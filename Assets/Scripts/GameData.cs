@@ -1,37 +1,40 @@
 ﻿using System;
 using System.IO;
+using Menu;
 using UnityEngine;
 
 [Serializable]
 public class GameData
 {
-    public string[] playersName = new string[2];
+    public PlayersName playersName;
     public int fieldWidth = 3;
     public int fieldHeight = 3;
     public int winLine = 3;
     public CellController.State[,] fieldState;
     public CellController.State lastState;
-    public bool isExistGame = false;
-    public float zoom = 1f;
-    public float positionX = 0f;
-    public float positionY = 0f;
+    public bool isExistGame;
+    public float positionX;
+    public float positionY;
 
     public static GameData Instance
     {
         get
         {
-            if(instance == null)
+            if (_instance == null)
             {
-                instance = GameManager.Instance.GetComponent<DataManager>().GetGameData();
+                _instance = GameManager.Instance.GetComponent<DataManager>().GetGameData();
             }
-            return instance;
+
+            return _instance;
         }
     }
-    private static GameData instance = null;
+
+    private static GameData _instance;
 
     public override string ToString()
     {
-        string str = "Имена игроков: " + playersName.ToString() + "; Рзамеры поля: " + fieldWidth + "x" + fieldHeight + "; Длина линни: " + winLine;
+        var str = "Имена игроков: " + playersName.first + " " + playersName.second + "; Рзамеры поля: " +
+                  fieldWidth + "x" + fieldHeight + "; Длина линни: " + winLine;
         str += "Предыдущая игра: " + Convert.ToInt16(isExistGame);
         return str;
     }
