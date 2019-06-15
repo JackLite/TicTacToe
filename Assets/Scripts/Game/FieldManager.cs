@@ -12,10 +12,12 @@ public class FieldManager : MonoBehaviour
     [SerializeField] 
     private GameObject cellPrefab;
     private GameObject[] cells;
-
-    [SerializeField] public GameObject sceneManager;
     private int horCellsCount;
     private int vertCellsCount;
+
+    [SerializeField] 
+    public SceneManager sceneManager;
+    
     public float cellSize = 100f;
     public CellController.State lastState { get; set; }
     public CellController.State[,] fieldState
@@ -31,7 +33,7 @@ public class FieldManager : MonoBehaviour
 
     private void Start()
     {
-        if(GameManager.Instance.isResumeGame)
+        if(GameManager.GetInstance().isResumeGame)
         {
             lastState = GameData.Instance.lastState;
             fieldState = GameData.Instance.fieldState;
@@ -52,49 +54,70 @@ public class FieldManager : MonoBehaviour
 
     public void initCells()
     {
-        addCells();
+        AddCells();
     }
-    private void addCells()
+    private void AddCells()
     {
-        int hor = horCellsCount - 1;
-        int vert = vertCellsCount - 1;
+        var hor = horCellsCount - 1;
+        var vert = vertCellsCount - 1;
         for (; hor >= 0; hor--)
         {
-            for (; vert >= 0; vert--)
+            for (var tmp = vert; tmp >= 0; tmp--)
             {
-                GameObject cell = GameObject.Instantiate(cellPrefab);
-               
-                cell.transform.SetParent(transform, false);
-
-                RectTransform rect = cell.GetComponent<RectTransform>();
-                rect.offsetMin = new Vector3(cellSize * hor, -cellSize * (vert + 1));
-                rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, cellSize);
-                rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, cellSize);
-
-                CellController cellController = cell.GetComponent<CellController>();
-                cellController.sceneManager = sceneManager.GetComponent<SceneManager>();
-                cellController.fieldManager = this;
-                cellController.hor_number = hor;
-                cellController.vert_number = vert;
-                if(GameManager.Instance.isResumeGame)
-                {
-                    fieldState[hor, vert] = GameData.Instance.fieldState[hor, vert];
-                    if(fieldState[hor, vert] != CellController.State.empty)
-                    {
-                        Image innerImage = cellController.transform.Find(CellController.childName).GetComponent<Image>();
-                        innerImage.color = new Color(0, 0, 0, 255);
-                        innerImage.sprite = sceneManager.GetComponent<SceneManager>().getSprite(fieldState[hor, vert]);
-                        cellController.currentState = fieldState[hor, vert];
-                    }
-                }
-                else
-                {
-                    fieldState[hor, vert] = CellController.State.empty;
-                }
+                InitCell(hor, tmp);
             }
-            GameData.Instance.fieldState = fieldState;
-            vert = vertCellsCount - 1;
         }
+        GameData.Instance.SaveFieldState(fieldState);
+    }
+
+    private void InitCell(int hor, int tmp)
+    {
+        var cell = Instantiate(cellPrefab, transform, false);
+
+        CalculateCellSize(cell, hor, tmp);
+
+        var cellController = cell.GetComponent<CellController>();
+        InitCellController(cellController, hor, tmp);
+
+        if (GameManager.GetInstance().isResumeGame)
+        {
+            InitSavedCell(hor, tmp, cellController);
+        }
+        else
+        {
+            fieldState[hor, tmp] = CellController.State.empty;
+        }
+    }
+
+    private void InitSavedCell(int hor, int vert, CellController cellController)
+    {
+        fieldState[hor, vert] = GameData.Instance.fieldState[hor, vert];
+        if (fieldState[hor, vert] == CellController.State.empty) return;
+        InitCellImage(hor, vert, cellController);
+    }
+
+    private void InitCellImage(int hor, int vert, CellController cellController)
+    {
+        var innerImage = cellController.transform.Find(CellController.childName).GetComponent<Image>();
+        innerImage.color = new Color(0, 0, 0, 255);
+        innerImage.sprite = sceneManager.getSprite(fieldState[hor, vert]);
+        cellController.currentState = fieldState[hor, vert];
+    }
+
+    private void InitCellController(CellController cellController, int hor, int vert)
+    {
+        cellController.sceneManager = sceneManager;
+        cellController.fieldManager = this;
+        cellController.hor_number = hor;
+        cellController.vert_number = vert;
+    }
+
+    private void CalculateCellSize(GameObject cell, int hor, int vert)
+    {
+        var rect = cell.GetComponent<RectTransform>();
+        rect.offsetMin = new Vector3(cellSize * hor, -cellSize * (vert + 1));
+        rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, cellSize);
+        rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, cellSize);
     }
 
     public void updateFieldState(int hor, int vert, CellController cellController)

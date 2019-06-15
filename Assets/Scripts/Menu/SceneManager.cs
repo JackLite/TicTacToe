@@ -11,14 +11,14 @@ namespace Menu
 
         public void StartGame()
         {
-            GameManager.Instance.isResumeGame = false;
+            GameManager.GetInstance().isResumeGame = false;
             preGameOptionsManager.SetParams();
             LoadGameScene();
         }
 
         public void ContinueGame()
         {
-            GameManager.Instance.isResumeGame = true;
+            GameManager.GetInstance().isResumeGame = true;
             LoadGameScene();
         }
 

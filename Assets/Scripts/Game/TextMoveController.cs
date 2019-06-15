@@ -7,9 +7,9 @@ public class TextMoveController : MonoBehaviour {
 
     [SerializeField] GameObject WhoMoveText;
 
-    private void Awake()
+    private void Start()
     {
-        if(GameData.Instance.isExistGame && GameManager.Instance.isResumeGame)
+        if(GameData.Instance.isExistGame && GameManager.GetInstance().isResumeGame)
         {
             if(GameData.Instance.lastState == CellController.State.cross)
             {

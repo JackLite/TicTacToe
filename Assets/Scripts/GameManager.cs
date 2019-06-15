@@ -1,25 +1,26 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     private const string GameName = "Game";
     private const string MenuName = "Menu";
 
+    private static GameManager _instance;
+
     public bool isResumeGame;
         
     private void Awake()
     {
-        if (Instance)
+        if (_instance)
         {
             DestroyImmediate(gameObject);
             return;
         }
-        Instance = this;
+        _instance = this;
 
         DontDestroyOnLoad(gameObject);
     }
-
-    public static GameManager Instance { get; private set; }
 
     public static string MenuSceneName
     {
@@ -33,7 +34,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager GetInstance()
     {
-        return Instance;
+        return _instance;
     }
     
     public static string GetWinnerName(CellController.State state)

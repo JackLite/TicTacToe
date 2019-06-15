@@ -39,9 +39,9 @@ namespace TrueGames
             }
         }
 
-        private void Start()
+        private void Awake()
         {
-            if(!GameManager.Instance)
+            if(!GameManager.GetInstance())
             {
                 UnityEngine.SceneManagement.SceneManager.LoadScene(GameManager.MenuSceneName);
             }

@@ -36,4 +36,9 @@ public class GameData
         str += "Предыдущая игра: " + Convert.ToInt16(isExistGame);
         return str;
     }
+
+    public void SaveFieldState(CellController.State[,] fieldState)
+    {
+        this.fieldState = fieldState;
+    }
 }

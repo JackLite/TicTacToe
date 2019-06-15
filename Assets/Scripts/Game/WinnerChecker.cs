@@ -46,7 +46,7 @@ public class WinnerChecker : MonoBehaviour
     }
     private void showWinner(CellController.State state)
     {
-        SceneManager sceneManager = fieldManager.sceneManager.GetComponent<SceneManager>();
+        var sceneManager = fieldManager.sceneManager;
         if (state == CellController.State.empty)
         {
             sceneManager.WinTitleText.SetActive(false);
