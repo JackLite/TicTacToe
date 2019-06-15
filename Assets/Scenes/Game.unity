@@ -976,6 +976,7 @@ GameObject:
   - component: {fileID: 1766301693}
   - component: {fileID: 1766301690}
   - component: {fileID: 1766301689}
+  - component: {fileID: 1766301691}
   m_Layer: 5
   m_Name: GameField
   m_TagString: Untagged
@@ -995,9 +996,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb86ab3647eccc04c97f284f844f9705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cellPrefab: {fileID: 1642168277442668, guid: 50bb4d6da19bbda429b8608698abbf3a, type: 3}
-  sceneManager: {fileID: 2101733917}
-  cellSize: 100
+  sceneManager: {fileID: 2101733918}
 --- !u!114 &1766301689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1035,6 +1034,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1766301687}
   m_CullTransparentMesh: 0
+--- !u!114 &1766301691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766301687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd81cfe1d0e1448fadd481eb31a259f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneManager: {fileID: 2101733918}
+  cellPrefab: {fileID: 1642168277442668, guid: 50bb4d6da19bbda429b8608698abbf3a, type: 3}
+  cellSize: 100
 --- !u!224 &1766301692
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1049,8 +1063,8 @@ RectTransform:
   m_Father: {fileID: 1268675433}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.1, y: 0.1}
-  m_AnchorMax: {x: 0.9, y: 1}
+  m_AnchorMin: {x: 0.05, y: 0.05}
+  m_AnchorMax: {x: 0.95, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1075,7 +1089,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1853647861}
-  - component: {fileID: 1853647862}
   - component: {fileID: 1853647863}
   m_Layer: 5
   m_Name: GameArea
@@ -1104,18 +1117,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1853647862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1853647860}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70e26985c0960234da443097316642ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!222 &1853647863
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿using Game.Field;
+using UnityEngine;
 using UnityEngine.UI;
-using TrueGames;
 
 public class WinnerChecker : MonoBehaviour
 {
@@ -10,7 +10,6 @@ public class WinnerChecker : MonoBehaviour
     private FieldManager fieldManager;
     private int winLine;
 
-    // Use this for initialization
     void Start()
     {
         fieldManager = GetComponent<FieldManager>();
@@ -65,7 +64,7 @@ public class WinnerChecker : MonoBehaviour
         {
             hor_pos++;
             CellController.State state = fieldState[hor_pos, last_vert];
-            if (state == fieldManager.lastState)
+            if (state == fieldManager.LastState)
             {
                 lineCount++;
             }
@@ -79,7 +78,7 @@ public class WinnerChecker : MonoBehaviour
         {
             hor_pos--;
             CellController.State state = fieldState[hor_pos, last_vert];
-            if (state == fieldManager.lastState)
+            if (state == fieldManager.LastState)
             {
                 lineCount++;
             }
@@ -105,7 +104,7 @@ public class WinnerChecker : MonoBehaviour
         {
             vert++;
             CellController.State state = fieldState[hor_pos, vert];
-            if (state == fieldManager.lastState)
+            if (state == fieldManager.LastState)
             {
                 lineCount++;
             }
@@ -119,7 +118,7 @@ public class WinnerChecker : MonoBehaviour
         {
             vert--;
             CellController.State state = fieldState[hor_pos, vert];
-            if (state == fieldManager.lastState)
+            if (state == fieldManager.LastState)
             {
                 lineCount++;
             }
@@ -162,7 +161,7 @@ public class WinnerChecker : MonoBehaviour
             hor++;
             vert++;
             CellController.State state = fieldState[hor, vert];
-            if (state == fieldManager.lastState)
+            if (state == fieldManager.LastState)
             {
                 lineCount++;
             }
@@ -178,7 +177,7 @@ public class WinnerChecker : MonoBehaviour
             hor--;
             vert--;
             CellController.State state = fieldState[hor, vert];
-            if (state == fieldManager.lastState)
+            if (state == fieldManager.LastState)
             {
                 lineCount++;
             }
@@ -206,7 +205,7 @@ public class WinnerChecker : MonoBehaviour
             hor++;
             vert--;
             CellController.State state = fieldState[hor, vert];
-            if (state == fieldManager.lastState)
+            if (state == fieldManager.LastState)
             {
                 lineCount++;
             }
@@ -222,7 +221,7 @@ public class WinnerChecker : MonoBehaviour
             hor--;
             vert++;
             CellController.State state = fieldState[hor, vert];
-            if (state == fieldManager.lastState)
+            if (state == fieldManager.LastState)
             {
                 lineCount++;
             }

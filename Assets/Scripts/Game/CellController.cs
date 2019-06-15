@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Game.Field;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -49,8 +50,8 @@ public class CellController : MonoBehaviour
         {
             return;
         }
-        sceneManager.GetComponent<TextMoveController>().changeWhoMove(fieldManager.lastState);
-        if (fieldManager.lastState == State.zero)
+        sceneManager.GetComponent<TextMoveController>().changeWhoMove(fieldManager.LastState);
+        if (fieldManager.LastState == State.zero)
         {
             setState(State.cross);
         }
@@ -66,7 +67,7 @@ public class CellController : MonoBehaviour
         innerImage.color = new Color(0, 0, 0, 255);
         innerImage.sprite = sceneManager.getSprite(state);
         currentState = state;
-        fieldManager.lastState = state;
+        fieldManager.LastState = state;
         GameData.Instance.lastState = state;
         fieldManager.updateFieldState(hor_number, vert_number, this);
         bool isEndGame = fieldManager.gameObject.GetComponent<WinnerChecker>().checkWinner(hor_number, vert_number, fieldManager.fieldState);
