@@ -1,12 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.Events;
-using UnityEngine.UI;
-using System;
+﻿using UnityEngine;
 using TrueGames;
-using UnityEngine.Serialization;
 
 namespace Game.Field
 {
@@ -33,7 +26,19 @@ namespace Game.Field
 
         private void Start()
         {
-            
+            InitState();
+            InitFieldSize();
+        }
+
+        private void InitFieldSize()
+        {
+            var cellSize = CellsInitializer.CalculateCellSize(GetFieldSize(), GameData.Instance.fieldSettings);
+            rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, horCellsCount * cellSize);
+            rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, vertCellsCount * cellSize);
+        }
+
+        private void InitState()
+        {
             if (GameManager.GetInstance().isResumeGame)
             {
                 LastState = GameData.Instance.lastState;
@@ -44,11 +49,6 @@ namespace Game.Field
                 LastState = CellState.cross;
                 fieldState = new CellState[horCellsCount, vertCellsCount];
             }
-            
-            var cellSize = CellsInitializer.CalculateCellSize(GetFieldSize(), GameData.Instance.fieldSettings);
-            rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, horCellsCount * cellSize);
-            rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, vertCellsCount * cellSize);
-            rectTransform.localPosition = new Vector2(0, 0);
         }
 
         public FieldRectSize GetFieldSize()
@@ -68,10 +68,10 @@ namespace Game.Field
             DataManager.SaveGameData();
         }
 
-        public bool isExistEmptyCells()
+        public bool IsExistEmptyCells()
         {
-            int hor = horCellsCount - 1;
-            int vert = vertCellsCount - 1;
+            var hor = horCellsCount - 1;
+            var vert = vertCellsCount - 1;
             for (; hor >= 0; hor--)
             {
                 for (; vert >= 0; vert--)

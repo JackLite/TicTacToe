@@ -36,7 +36,7 @@ public class WinnerChecker : MonoBehaviour
             showWinner(fieldState[last_hor, last_vert]);
             return true;
         }
-        else if (!fieldManager.isExistEmptyCells())
+        else if (!fieldManager.IsExistEmptyCells())
         {
             showWinner(CellState.empty);
             return true;
