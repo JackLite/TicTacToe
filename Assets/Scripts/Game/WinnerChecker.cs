@@ -87,7 +87,7 @@ public class WinnerChecker : MonoBehaviour
                 break;
             }
         }
-        if (lineCount == winLine - 1)
+        if (lineCount >= winLine - 1)
         {
             return true;
         }
@@ -127,7 +127,7 @@ public class WinnerChecker : MonoBehaviour
                 break;
             }
         }
-        if (lineCount == winLine - 1)
+        if (lineCount >= winLine - 1)
         {
             return true;
         }
@@ -186,7 +186,7 @@ public class WinnerChecker : MonoBehaviour
                 break;
             }
         }
-        if (lineCount == winLine - 1)
+        if (lineCount >= winLine - 1)
         {
             return true;
         }
@@ -230,7 +230,7 @@ public class WinnerChecker : MonoBehaviour
                 break;
             }
         }
-        if (lineCount == winLine - 1)
+        if (lineCount >= winLine - 1)
         {
             return true;
         }
