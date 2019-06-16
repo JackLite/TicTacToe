@@ -4,8 +4,8 @@ namespace Game.Field
 {
     public struct FieldRectSize
     {
-        public float Width;
-        public float Height;
+        public readonly float Width;
+        public readonly float Height;
 
         public FieldRectSize(float width, float height)
         {

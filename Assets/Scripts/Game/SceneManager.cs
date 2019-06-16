@@ -66,18 +66,5 @@ namespace TrueGames
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene(GameManager.MenuSceneName);
         }
-
-        public void resetLastCell()
-        {
-            if (
-                LastCell is GameObject
-                && LastCell.GetComponent<CellController>().Choosen
-                && LastCell.GetComponent<CellController>().currentState == CellState.Empty
-                )
-            {
-                LastCell.transform.transform.Find(CellController.childName).GetComponent<Image>().color = new Color(0, 0, 0, 0);
-                LastCell.GetComponent<CellController>().Choosen = false;
-            }
-        }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Game.Field;
+﻿using Game.Field;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -8,8 +6,6 @@ using TrueGames;
 
 public class CellController : MonoBehaviour
 {
-    private bool choosen = false;
-
     public const string childName = "inner";
 
     public int hor_number { get; set; }
@@ -22,19 +18,6 @@ public class CellController : MonoBehaviour
     {
         get; set;
     }
-    public Color choosenColor;
-    public bool Choosen
-    {
-        get
-        {
-            return choosen;
-        }
-        set
-        {
-            choosen = value;
-        }
-    }
-
 
     public CellState currentState = CellState.Empty;
 
