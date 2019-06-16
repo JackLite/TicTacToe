@@ -3,18 +3,19 @@ using TrueGames;
 
 namespace Game.Field
 {
+    [RequireComponent(typeof(TextMoveController))]
     public class FieldManager : MonoBehaviour
     {
         private int horCellsCount;
         private int vertCellsCount;
         private RectTransform rectTransform;
         private FieldRectSize fieldRectSize;
-
-
+        private TextMoveController textMoveController;
+        
         [SerializeField]
         public SceneManager sceneManager;
 
-        public CellState LastState { get; set; }
+        public CellState CurrentState { get; set; }
         public CellState[,] fieldState;
 
         private void Awake()
@@ -22,6 +23,7 @@ namespace Game.Field
             horCellsCount = GameData.Instance.fieldSettings.width;
             vertCellsCount = GameData.Instance.fieldSettings.height;
             rectTransform = GetComponent<RectTransform>();
+            textMoveController = GetComponent<TextMoveController>();
         }
 
         private void Start()
@@ -41,14 +43,15 @@ namespace Game.Field
         {
             if (GameManager.GetInstance().isResumeGame)
             {
-                LastState = GameData.Instance.lastState;
+                CurrentState = GameData.Instance.lastState;
                 fieldState = GameData.Instance.fieldState;
             }
             else
             {
-                LastState = CellState.Cross;
+                CurrentState = CellState.Cross;
                 fieldState = new CellState[horCellsCount, vertCellsCount];
             }
+            textMoveController.ChangeWhoMove(CurrentState);
         }
 
         public FieldRectSize GetFieldSize()
@@ -86,6 +89,12 @@ namespace Game.Field
             }
 
             return false;
+        }
+
+        public void SwitchState(CellState current)
+        {
+            CurrentState = current == CellState.Cross ? CellState.Zero : CellState.Cross;
+            textMoveController.ChangeWhoMove(CurrentState);
         }
     }
 }

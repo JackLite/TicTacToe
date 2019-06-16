@@ -1,35 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Game.Field;
+﻿using Game.Field;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TextMoveController : MonoBehaviour {
 
-    [SerializeField] GameObject WhoMoveText;
+    [SerializeField] 
+    private Text whoMoveText;
 
-    private void Start()
+    public void ChangeWhoMove(CellState state)
     {
-        if(GameData.Instance.isExistGame && GameManager.GetInstance().isResumeGame)
-        {
-            if(GameData.Instance.lastState == CellState.Cross)
-            {
-                changeWhoMove(CellState.Zero);
-            }
-            else
-            {
-                changeWhoMove(CellState.Cross);
-            }
-        }
-        else
-        {
-            changeWhoMove(CellState.Empty);
-        }
-    }
-
-    public void changeWhoMove(CellState state)
-    {
-        string text = GameManager.GetInstance().GetComponent<PlayersManager>().getWhoMoveNick(state);
-        WhoMoveText.GetComponent<Text>().text = text;
+        var text = GameManager.GetInstance().GetComponent<PlayersManager>().getWhoMoveNick(state);
+        whoMoveText.text = text;
     }
 }

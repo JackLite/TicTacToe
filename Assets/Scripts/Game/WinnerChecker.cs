@@ -64,7 +64,7 @@ public class WinnerChecker : MonoBehaviour
         {
             hor_pos++;
             CellState state = fieldState[hor_pos, last_vert];
-            if (state == fieldManager.LastState)
+            if (state == fieldManager.CurrentState)
             {
                 lineCount++;
             }
@@ -78,7 +78,7 @@ public class WinnerChecker : MonoBehaviour
         {
             hor_pos--;
             CellState state = fieldState[hor_pos, last_vert];
-            if (state == fieldManager.LastState)
+            if (state == fieldManager.CurrentState)
             {
                 lineCount++;
             }
@@ -104,7 +104,7 @@ public class WinnerChecker : MonoBehaviour
         {
             vert++;
             CellState state = fieldState[hor_pos, vert];
-            if (state == fieldManager.LastState)
+            if (state == fieldManager.CurrentState)
             {
                 lineCount++;
             }
@@ -118,7 +118,7 @@ public class WinnerChecker : MonoBehaviour
         {
             vert--;
             CellState state = fieldState[hor_pos, vert];
-            if (state == fieldManager.LastState)
+            if (state == fieldManager.CurrentState)
             {
                 lineCount++;
             }
@@ -161,7 +161,7 @@ public class WinnerChecker : MonoBehaviour
             hor++;
             vert++;
             CellState state = fieldState[hor, vert];
-            if (state == fieldManager.LastState)
+            if (state == fieldManager.CurrentState)
             {
                 lineCount++;
             }
@@ -177,7 +177,7 @@ public class WinnerChecker : MonoBehaviour
             hor--;
             vert--;
             CellState state = fieldState[hor, vert];
-            if (state == fieldManager.LastState)
+            if (state == fieldManager.CurrentState)
             {
                 lineCount++;
             }
@@ -205,7 +205,7 @@ public class WinnerChecker : MonoBehaviour
             hor++;
             vert--;
             CellState state = fieldState[hor, vert];
-            if (state == fieldManager.LastState)
+            if (state == fieldManager.CurrentState)
             {
                 lineCount++;
             }
@@ -221,7 +221,7 @@ public class WinnerChecker : MonoBehaviour
             hor--;
             vert++;
             CellState state = fieldState[hor, vert];
-            if (state == fieldManager.LastState)
+            if (state == fieldManager.CurrentState)
             {
                 lineCount++;
             }

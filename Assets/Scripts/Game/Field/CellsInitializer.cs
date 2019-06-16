@@ -75,7 +75,7 @@ namespace Game.Field
 
         private void InitCellImage(int hor, int vert, CellController cellController)
         {
-            var innerImage = cellController.transform.Find(CellController.childName).GetComponent<Image>();
+            var innerImage = cellController.GetInnerImage();
             innerImage.color = new Color(0, 0, 0, 255);
             innerImage.sprite = sceneManager.getSprite(fieldManager.fieldState[hor, vert]);
             cellController.currentState = fieldManager.fieldState[hor, vert];
@@ -83,10 +83,10 @@ namespace Game.Field
 
         private void InitCellController(CellController cellController, int hor, int vert)
         {
-            cellController.sceneManager = sceneManager;
-            cellController.fieldManager = fieldManager;
-            cellController.hor_number = hor;
-            cellController.vert_number = vert;
+            cellController.SceneManager = sceneManager;
+            cellController.FieldManager = fieldManager;
+            cellController.HorNumber = hor;
+            cellController.VertNumber = vert;
         }
 
         private void CalculateCellSize(GameObject cell, int hor, int vert)

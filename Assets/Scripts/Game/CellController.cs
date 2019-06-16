@@ -6,20 +6,36 @@ using TrueGames;
 
 public class CellController : MonoBehaviour
 {
-    public const string childName = "inner";
+    public const string ChildName = "inner";
+    
+    [SerializeField]
+    private Image innerImage;
 
-    public int hor_number { get; set; }
-    public int vert_number { get; set; }
-    public SceneManager sceneManager
+    public int HorNumber { get; set; }
+    public int VertNumber { get; set; }
+    public SceneManager SceneManager
     {
         get; set;
     }
-    public FieldManager fieldManager
+    public FieldManager FieldManager
     {
         get; set;
     }
 
     public CellState currentState = CellState.Empty;
+
+    private void Start()
+    {
+        InitClickHandler();
+    }
+
+    private void InitClickHandler()
+    {
+        var eventTrigger = GetComponent<EventTrigger>();
+        var eventEntry = new EventTrigger.Entry {eventID = EventTriggerType.PointerClick};
+        eventEntry.callback.AddListener(clickHandler);
+        eventTrigger.triggers.Add(eventEntry);
+    }
 
     public void clickHandler(BaseEventData eventData)
     {
@@ -27,27 +43,21 @@ public class CellController : MonoBehaviour
         {
             return;
         }
-        sceneManager.GetComponent<TextMoveController>().changeWhoMove(fieldManager.LastState);
-        if (fieldManager.LastState == CellState.Zero)
-        {
-            setState(CellState.Cross);
-        }
-        else
-        {
-            setState(CellState.Zero);
-        }
+
+        var state = FieldManager.CurrentState == CellState.Cross ? CellState.Cross : CellState.Zero;
+        SetState(state);
+        FieldManager.SwitchState(state);
     }
 
-    public void setState(CellState state)
+    public void SetState(CellState state)
     {
-        Image innerImage = transform.Find(childName).GetComponent<Image>();
         innerImage.color = new Color(0, 0, 0, 255);
-        innerImage.sprite = sceneManager.getSprite(state);
+        innerImage.sprite = SceneManager.getSprite(state);
         currentState = state;
-        fieldManager.LastState = state;
+        FieldManager.CurrentState = state;
         GameData.Instance.lastState = state;
-        fieldManager.UpdateFieldState(hor_number, vert_number, state);
-        bool isEndGame = fieldManager.gameObject.GetComponent<WinnerChecker>().checkWinner(hor_number, vert_number, fieldManager.fieldState);
+        FieldManager.UpdateFieldState(HorNumber, VertNumber, state);
+        bool isEndGame = FieldManager.gameObject.GetComponent<WinnerChecker>().checkWinner(HorNumber, VertNumber, FieldManager.fieldState);
         if (isEndGame)
         {
             GameData.Instance.isExistGame = false;
@@ -55,11 +65,8 @@ public class CellController : MonoBehaviour
         }
     }
 
-    private void Start()
+    public Image GetInnerImage()
     {
-        var eventTrigger = GetComponent<EventTrigger>();
-        var eventEntry = new EventTrigger.Entry {eventID = EventTriggerType.PointerClick};
-        eventEntry.callback.AddListener(clickHandler);
-        eventTrigger.triggers.Add(eventEntry);
+        return innerImage;
     }
 }

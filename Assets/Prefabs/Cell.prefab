@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 645199fe1ed0c514cb6d7d44ef1f824c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  choosenColor: {r: 0, g: 0, b: 0, a: 0.19607843}
+  innerImage: {fileID: 114415401055669128}
   currentState: 0
 --- !u!114 &114247954168559182
 MonoBehaviour:
