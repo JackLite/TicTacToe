@@ -18,7 +18,7 @@ public class WinnerChecker : MonoBehaviour
         winLine = GameData.Instance.fieldSettings.winLine;
     }
 
-    public bool checkWinner(int last_hor, int last_vert, CellController.State[,] fieldState)
+    public bool checkWinner(int last_hor, int last_vert, CellState[,] fieldState)
     {
 
         if (checkHorizontal(last_hor, last_vert, fieldState))
@@ -38,15 +38,15 @@ public class WinnerChecker : MonoBehaviour
         }
         else if (!fieldManager.isExistEmptyCells())
         {
-            showWinner(CellController.State.empty);
+            showWinner(CellState.empty);
             return true;
         }
         return false;
     }
-    private void showWinner(CellController.State state)
+    private void showWinner(CellState state)
     {
         var sceneManager = fieldManager.sceneManager;
-        if (state == CellController.State.empty)
+        if (state == CellState.empty)
         {
             sceneManager.WinTitleText.SetActive(false);
             sceneManager.WinText.GetComponent<Text>().text = "Ничья!";
@@ -57,13 +57,13 @@ public class WinnerChecker : MonoBehaviour
         }
         sceneManager.ShowWinner();
     }
-    private bool checkHorizontal(int last_hor, int last_vert, CellController.State[,] fieldState)
+    private bool checkHorizontal(int last_hor, int last_vert, CellState[,] fieldState)
     {
         int hor_pos = last_hor;
         while (hor_pos < horCellsCount - 1)
         {
             hor_pos++;
-            CellController.State state = fieldState[hor_pos, last_vert];
+            CellState state = fieldState[hor_pos, last_vert];
             if (state == fieldManager.LastState)
             {
                 lineCount++;
@@ -77,7 +77,7 @@ public class WinnerChecker : MonoBehaviour
         while (hor_pos > 0)
         {
             hor_pos--;
-            CellController.State state = fieldState[hor_pos, last_vert];
+            CellState state = fieldState[hor_pos, last_vert];
             if (state == fieldManager.LastState)
             {
                 lineCount++;
@@ -97,13 +97,13 @@ public class WinnerChecker : MonoBehaviour
             return false;
         }
     }
-    private bool checkVertical(int hor_pos, int vert_pos, CellController.State[,] fieldState)
+    private bool checkVertical(int hor_pos, int vert_pos, CellState[,] fieldState)
     {
         int vert = vert_pos;
         while (vert < vertCellsCount - 1)
         {
             vert++;
-            CellController.State state = fieldState[hor_pos, vert];
+            CellState state = fieldState[hor_pos, vert];
             if (state == fieldManager.LastState)
             {
                 lineCount++;
@@ -117,7 +117,7 @@ public class WinnerChecker : MonoBehaviour
         while (vert > 0)
         {
             vert--;
-            CellController.State state = fieldState[hor_pos, vert];
+            CellState state = fieldState[hor_pos, vert];
             if (state == fieldManager.LastState)
             {
                 lineCount++;
@@ -137,7 +137,7 @@ public class WinnerChecker : MonoBehaviour
             return false;
         }
     }
-    private bool checkDiagonal(int hor_pos, int vert_pos, CellController.State[,] fieldState)
+    private bool checkDiagonal(int hor_pos, int vert_pos, CellState[,] fieldState)
     {
         if (checkDiagonalFromTop(hor_pos, vert_pos, fieldState))
         {
@@ -152,7 +152,7 @@ public class WinnerChecker : MonoBehaviour
             return false;
         }
     }
-    private bool checkDiagonalFromTop(int hor_pos, int vert_pos, CellController.State[,] fieldState)
+    private bool checkDiagonalFromTop(int hor_pos, int vert_pos, CellState[,] fieldState)
     {
         int hor = hor_pos;
         int vert = vert_pos;
@@ -160,7 +160,7 @@ public class WinnerChecker : MonoBehaviour
         {
             hor++;
             vert++;
-            CellController.State state = fieldState[hor, vert];
+            CellState state = fieldState[hor, vert];
             if (state == fieldManager.LastState)
             {
                 lineCount++;
@@ -176,7 +176,7 @@ public class WinnerChecker : MonoBehaviour
         {
             hor--;
             vert--;
-            CellController.State state = fieldState[hor, vert];
+            CellState state = fieldState[hor, vert];
             if (state == fieldManager.LastState)
             {
                 lineCount++;
@@ -196,7 +196,7 @@ public class WinnerChecker : MonoBehaviour
             return false;
         }
     }
-    private bool checkDiagonalFromBottom(int hor_pos, int vert_pos, CellController.State[,] fieldState)
+    private bool checkDiagonalFromBottom(int hor_pos, int vert_pos, CellState[,] fieldState)
     {
         int hor = hor_pos;
         int vert = vert_pos;
@@ -204,7 +204,7 @@ public class WinnerChecker : MonoBehaviour
         {
             hor++;
             vert--;
-            CellController.State state = fieldState[hor, vert];
+            CellState state = fieldState[hor, vert];
             if (state == fieldManager.LastState)
             {
                 lineCount++;
@@ -220,7 +220,7 @@ public class WinnerChecker : MonoBehaviour
         {
             hor--;
             vert++;
-            CellController.State state = fieldState[hor, vert];
+            CellState state = fieldState[hor, vert];
             if (state == fieldManager.LastState)
             {
                 lineCount++;

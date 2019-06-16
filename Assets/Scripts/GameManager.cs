@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game.Field;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -37,15 +38,15 @@ public class GameManager : MonoBehaviour
         return _instance;
     }
     
-    public static string GetWinnerName(CellController.State state)
+    public static string GetWinnerName(CellState state)
     {
         switch (state)
         {
-            case CellController.State.cross:
+            case CellState.cross:
                 return GameData.Instance.playersName.first;
-            case CellController.State.zero:
+            case CellState.zero:
                 return GameData.Instance.playersName.second;
-            case CellController.State.empty:
+            case CellState.empty:
                 throw new System.Exception("Передано неверное состояние");
             default:
                 throw new System.Exception("Передано неверное состояние");

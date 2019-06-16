@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Game.Field;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,22 +12,22 @@ public class TextMoveController : MonoBehaviour {
     {
         if(GameData.Instance.isExistGame && GameManager.GetInstance().isResumeGame)
         {
-            if(GameData.Instance.lastState == CellController.State.cross)
+            if(GameData.Instance.lastState == CellState.cross)
             {
-                changeWhoMove(CellController.State.zero);
+                changeWhoMove(CellState.zero);
             }
             else
             {
-                changeWhoMove(CellController.State.cross);
+                changeWhoMove(CellState.cross);
             }
         }
         else
         {
-            changeWhoMove(CellController.State.empty);
+            changeWhoMove(CellState.empty);
         }
     }
 
-    public void changeWhoMove(CellController.State state)
+    public void changeWhoMove(CellState state)
     {
         string text = GameManager.GetInstance().GetComponent<PlayersManager>().getWhoMoveNick(state);
         WhoMoveText.GetComponent<Text>().text = text;

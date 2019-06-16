@@ -22,12 +22,6 @@ public class CellController : MonoBehaviour
     {
         get; set;
     }
-    public enum State
-    {
-        empty,
-        cross,
-        zero
-    }
     public Color choosenColor;
     public bool Choosen
     {
@@ -42,26 +36,26 @@ public class CellController : MonoBehaviour
     }
 
 
-    public State currentState = State.empty;
+    public CellState currentState = CellState.empty;
 
     public void clickHandler(BaseEventData eventData)
     {
-        if (currentState != State.empty)
+        if (currentState != CellState.empty)
         {
             return;
         }
         sceneManager.GetComponent<TextMoveController>().changeWhoMove(fieldManager.LastState);
-        if (fieldManager.LastState == State.zero)
+        if (fieldManager.LastState == CellState.zero)
         {
-            setState(State.cross);
+            setState(CellState.cross);
         }
         else
         {
-            setState(State.zero);
+            setState(CellState.zero);
         }
     }
 
-    public void setState(State state)
+    public void setState(CellState state)
     {
         Image innerImage = transform.Find(childName).GetComponent<Image>();
         innerImage.color = new Color(0, 0, 0, 255);
@@ -69,7 +63,7 @@ public class CellController : MonoBehaviour
         currentState = state;
         fieldManager.LastState = state;
         GameData.Instance.lastState = state;
-        fieldManager.updateFieldState(hor_number, vert_number, this);
+        fieldManager.UpdateFieldState(hor_number, vert_number, state);
         bool isEndGame = fieldManager.gameObject.GetComponent<WinnerChecker>().checkWinner(hor_number, vert_number, fieldManager.fieldState);
         if (isEndGame)
         {

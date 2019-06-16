@@ -21,8 +21,8 @@ namespace Game.Field
         [SerializeField]
         public SceneManager sceneManager;
 
-        public CellController.State LastState { get; set; }
-        public CellController.State[,] fieldState;
+        public CellState LastState { get; set; }
+        public CellState[,] fieldState;
 
         private void Awake()
         {
@@ -41,8 +41,8 @@ namespace Game.Field
             }
             else
             {
-                LastState = CellController.State.zero;
-                fieldState = new CellController.State[horCellsCount, vertCellsCount];
+                LastState = CellState.cross;
+                fieldState = new CellState[horCellsCount, vertCellsCount];
             }
             
             var cellSize = CellsInitializer.CalculateCellSize(GetFieldSize(), GameData.Instance.fieldSettings);
@@ -61,9 +61,9 @@ namespace Game.Field
             return fieldRectSize;
         }
 
-        public void updateFieldState(int hor, int vert, CellController cellController)
+        public void UpdateFieldState(int hor, int vert, CellState state)
         {
-            fieldState[hor, vert] = cellController.currentState;
+            fieldState[hor, vert] = state;
             GameData.Instance.fieldState = fieldState;
             DataManager.SaveGameData();
         }
@@ -76,7 +76,7 @@ namespace Game.Field
             {
                 for (; vert >= 0; vert--)
                 {
-                    if (fieldState[hor, vert] == CellController.State.empty)
+                    if (fieldState[hor, vert] == CellState.empty)
                     {
                         return true;
                     }

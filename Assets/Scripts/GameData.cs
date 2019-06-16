@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Game.Field;
 using Menu;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -9,8 +10,8 @@ public class GameData
 {
     public PlayersName playersName;
     public FieldSettings fieldSettings;
-    public CellController.State[,] fieldState;
-    public CellController.State lastState;
+    public CellState[,] fieldState;
+    public CellState lastState;
     public bool isExistGame;
 
     public static GameData Instance
@@ -37,7 +38,7 @@ public class GameData
         return str;
     }
 
-    public void SaveFieldState(CellController.State[,] fieldState)
+    public void SaveFieldState(CellState[,] fieldState)
     {
         this.fieldState = fieldState;
     }

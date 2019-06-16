@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Game.Field;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,13 +24,13 @@ namespace TrueGames
             return cell;
         }
 
-        public Sprite getSprite(CellController.State state)
+        public Sprite getSprite(CellState state)
         {
-            if (state == CellController.State.cross)
+            if (state == CellState.cross)
             {
                 return cross;
             }
-            else if(state == CellController.State.zero)
+            else if(state == CellState.zero)
             {
                 return zero;
             }
@@ -71,7 +72,7 @@ namespace TrueGames
             if (
                 LastCell is GameObject
                 && LastCell.GetComponent<CellController>().Choosen
-                && LastCell.GetComponent<CellController>().currentState == CellController.State.empty
+                && LastCell.GetComponent<CellController>().currentState == CellState.empty
                 )
             {
                 LastCell.transform.transform.Find(CellController.childName).GetComponent<Image>().color = new Color(0, 0, 0, 0);

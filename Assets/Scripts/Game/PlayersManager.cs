@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Game.Field;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,13 +17,13 @@ public class PlayersManager : MonoBehaviour {
 
     [SerializeField] GameObject playerPrefab;
 
-    public string getWhoMoveNick(CellController.State state)
+    public string getWhoMoveNick(CellState state)
     {
-        if(state == CellController.State.cross)
+        if(state == CellState.cross)
         {
             return GameData.Instance.playersName.first;
         }
-        else if(state == CellController.State.zero)
+        else if(state == CellState.zero)
         {
             return GameData.Instance.playersName.second;
         }
