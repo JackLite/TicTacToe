@@ -42,11 +42,11 @@ public class GameManager : MonoBehaviour
     {
         switch (state)
         {
-            case CellState.cross:
+            case CellState.Cross:
                 return GameData.Instance.playersName.first;
-            case CellState.zero:
+            case CellState.Zero:
                 return GameData.Instance.playersName.second;
-            case CellState.empty:
+            case CellState.Empty:
                 throw new System.Exception("Передано неверное состояние");
             default:
                 throw new System.Exception("Передано неверное состояние");

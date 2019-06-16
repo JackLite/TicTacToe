@@ -12,18 +12,18 @@ public class TextMoveController : MonoBehaviour {
     {
         if(GameData.Instance.isExistGame && GameManager.GetInstance().isResumeGame)
         {
-            if(GameData.Instance.lastState == CellState.cross)
+            if(GameData.Instance.lastState == CellState.Cross)
             {
-                changeWhoMove(CellState.zero);
+                changeWhoMove(CellState.Zero);
             }
             else
             {
-                changeWhoMove(CellState.cross);
+                changeWhoMove(CellState.Cross);
             }
         }
         else
         {
-            changeWhoMove(CellState.empty);
+            changeWhoMove(CellState.Empty);
         }
     }
 

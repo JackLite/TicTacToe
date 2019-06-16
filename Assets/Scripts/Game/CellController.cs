@@ -36,22 +36,22 @@ public class CellController : MonoBehaviour
     }
 
 
-    public CellState currentState = CellState.empty;
+    public CellState currentState = CellState.Empty;
 
     public void clickHandler(BaseEventData eventData)
     {
-        if (currentState != CellState.empty)
+        if (currentState != CellState.Empty)
         {
             return;
         }
         sceneManager.GetComponent<TextMoveController>().changeWhoMove(fieldManager.LastState);
-        if (fieldManager.LastState == CellState.zero)
+        if (fieldManager.LastState == CellState.Zero)
         {
-            setState(CellState.cross);
+            setState(CellState.Cross);
         }
         else
         {
-            setState(CellState.zero);
+            setState(CellState.Zero);
         }
     }
 

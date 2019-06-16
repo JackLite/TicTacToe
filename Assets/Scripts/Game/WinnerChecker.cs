@@ -38,7 +38,7 @@ public class WinnerChecker : MonoBehaviour
         }
         else if (!fieldManager.IsExistEmptyCells())
         {
-            showWinner(CellState.empty);
+            showWinner(CellState.Empty);
             return true;
         }
         return false;
@@ -46,7 +46,7 @@ public class WinnerChecker : MonoBehaviour
     private void showWinner(CellState state)
     {
         var sceneManager = fieldManager.sceneManager;
-        if (state == CellState.empty)
+        if (state == CellState.Empty)
         {
             sceneManager.WinTitleText.SetActive(false);
             sceneManager.WinText.GetComponent<Text>().text = "Ничья!";

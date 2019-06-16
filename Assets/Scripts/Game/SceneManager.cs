@@ -26,11 +26,11 @@ namespace TrueGames
 
         public Sprite getSprite(CellState state)
         {
-            if (state == CellState.cross)
+            if (state == CellState.Cross)
             {
                 return cross;
             }
-            else if(state == CellState.zero)
+            else if(state == CellState.Zero)
             {
                 return zero;
             }
@@ -72,7 +72,7 @@ namespace TrueGames
             if (
                 LastCell is GameObject
                 && LastCell.GetComponent<CellController>().Choosen
-                && LastCell.GetComponent<CellController>().currentState == CellState.empty
+                && LastCell.GetComponent<CellController>().currentState == CellState.Empty
                 )
             {
                 LastCell.transform.transform.Find(CellController.childName).GetComponent<Image>().color = new Color(0, 0, 0, 0);

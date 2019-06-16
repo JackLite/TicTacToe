@@ -46,7 +46,7 @@ namespace Game.Field
             }
             else
             {
-                LastState = CellState.cross;
+                LastState = CellState.Cross;
                 fieldState = new CellState[horCellsCount, vertCellsCount];
             }
         }
@@ -76,7 +76,7 @@ namespace Game.Field
             {
                 for (; vert >= 0; vert--)
                 {
-                    if (fieldState[hor, vert] == CellState.empty)
+                    if (fieldState[hor, vert] == CellState.Empty)
                     {
                         return true;
                     }

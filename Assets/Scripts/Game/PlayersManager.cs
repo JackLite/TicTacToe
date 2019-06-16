@@ -19,11 +19,11 @@ public class PlayersManager : MonoBehaviour {
 
     public string getWhoMoveNick(CellState state)
     {
-        if(state == CellState.cross)
+        if(state == CellState.Cross)
         {
             return GameData.Instance.playersName.first;
         }
-        else if(state == CellState.zero)
+        else if(state == CellState.Zero)
         {
             return GameData.Instance.playersName.second;
         }

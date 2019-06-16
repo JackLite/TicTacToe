@@ -62,14 +62,14 @@ namespace Game.Field
             }
             else
             {
-                fieldManager.fieldState[hor, tmp] = CellState.empty;
+                fieldManager.fieldState[hor, tmp] = CellState.Empty;
             }
         }
         
         private void InitSavedCell(int hor, int vert, CellController cellController)
         {
             fieldManager.fieldState[hor, vert] = GameData.Instance.fieldState[hor, vert];
-            if (fieldManager.fieldState[hor, vert] == CellState.empty) return;
+            if (fieldManager.fieldState[hor, vert] == CellState.Empty) return;
             InitCellImage(hor, vert, cellController);
         }
 
