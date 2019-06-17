@@ -46,52 +46,50 @@ namespace Menu
 
         private void DeactivePrev()
         {
-            if (currentState == State.preGameOptions)
+            switch (currentState)
             {
-                preGameOptions.SetActive(false);
-            }
-            if (currentState == State.options)
-            {
-                options.SetActive(false);
-            }
-            if (currentState == State.autors)
-            {
-                autors.SetActive(false);
+                case State.preGameOptions:
+                    preGameOptions.SetActive(false);
+                    break;
+                case State.options:
+                    options.SetActive(false);
+                    break;
+                case State.autors:
+                    autors.SetActive(false);
+                    break;
             }
         }
 
         private void ActiveNew(State state)
         {
-            if (state == State.menu)
+            switch (state)
             {
-                menu.SetActive(true);
-            }
-            if (state == State.preGameOptions)
-            {
-                preGameOptions.SetActive(true);
-            }
-            if (state == State.options)
-            {
-                options.SetActive(true);
-            }
-            if (state == State.autors)
-            {
-                autors.SetActive(true);
+                case State.menu:
+                    menu.SetActive(true);
+                    break;
+                case State.preGameOptions:
+                    preGameOptions.SetActive(true);
+                    break;
+                case State.options:
+                    options.SetActive(true);
+                    break;
+                case State.autors:
+                    autors.SetActive(true);
+                    break;
             }
         }
 
         private void Update()
         {
-            if (Input.GetKey(KeyCode.Escape))
+            if (!Input.GetKey(KeyCode.Escape)) return;
+            
+            if (currentState != State.menu)
             {
-                if (currentState != State.menu)
-                {
-                    ShowMenu();
-                }
-                else
-                {
-                    Application.Quit();
-                }
+                ShowMenu();
+            }
+            else
+            {
+                Application.Quit();
             }
         }
     }
