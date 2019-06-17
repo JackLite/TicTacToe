@@ -1,27 +1,28 @@
 ﻿using Game.Field;
+using TrueGames;
+using TrueGames.Cell;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using TrueGames;
-using TrueGames.Cell;
-using UnityEngine.Serialization;
 
 public class CellController : MonoBehaviour
 {
-    [SerializeField]
-    private Image innerImage;
-    
+    public CellState currentState = CellState.Empty;
+
     private FieldManager fieldManager;
     private FieldSettings fieldSettings;
-    private SceneManager sceneManager;
+
+    [SerializeField]
+    private Image innerImage;
+
     private CellPosition position;
-    public CellState currentState = CellState.Empty;
+    private SceneManager sceneManager;
 
     public void SetPosition(CellPosition pos)
     {
         position = pos;
     }
-    
+
     public void SetSceneManager(SceneManager manager)
     {
         sceneManager = manager;
@@ -31,7 +32,7 @@ public class CellController : MonoBehaviour
     {
         fieldManager = manager;
     }
-    
+
     private void Start()
     {
         InitClickHandler();
@@ -47,10 +48,7 @@ public class CellController : MonoBehaviour
 
     private void ClickHandler(BaseEventData eventData)
     {
-        if (currentState != CellState.Empty)
-        {
-            return;
-        }
+        if (currentState != CellState.Empty) return;
 
         var state = fieldManager.CurrentState == CellState.Cross ? CellState.Cross : CellState.Zero;
         SetState(state);
@@ -65,12 +63,11 @@ public class CellController : MonoBehaviour
         fieldManager.CurrentState = state;
         GameData.Instance.lastState = state;
         fieldManager.UpdateFieldState(position.X, position.Y, state);
-        bool isEndGame = fieldManager.gameObject.GetComponent<WinnerChecker>().checkWinner(position.X, position.Y, fieldManager.fieldState);
-        if (isEndGame)
-        {
-            GameData.Instance.isExistGame = false;
-            DataManager.SaveGameData();
-        }
+        //todo после рефакторинга WinnerChecker вынести последние 4 строки в делегат и повесить на событие обновления поля
+        var isEndGame = fieldManager.GetComponent<WinnerChecker>().checkWinner(position.X, position.Y, fieldManager.fieldState);
+        if (!isEndGame) return;
+        GameData.Instance.isExistGame = false;
+        DataManager.SaveGameData();
     }
 
     public Image GetInnerImage()
