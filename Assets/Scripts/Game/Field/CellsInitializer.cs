@@ -1,5 +1,6 @@
 using System;
 using TrueGames;
+using TrueGames.Cell;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -83,10 +84,9 @@ namespace Game.Field
 
         private void InitCellController(CellController cellController, int hor, int vert)
         {
-            cellController.SceneManager = sceneManager;
-            cellController.FieldManager = fieldManager;
-            cellController.HorNumber = hor;
-            cellController.VertNumber = vert;
+            cellController.SetFieldManager(fieldManager);
+            cellController.SetSceneManager(sceneManager);
+            cellController.SetPosition(new CellPosition(hor, vert));
         }
 
         private void CalculateCellSize(GameObject cell, int hor, int vert)

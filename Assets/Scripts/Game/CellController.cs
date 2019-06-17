@@ -3,27 +3,35 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TrueGames;
+using TrueGames.Cell;
+using UnityEngine.Serialization;
 
 public class CellController : MonoBehaviour
 {
-    public const string ChildName = "inner";
-    
     [SerializeField]
     private Image innerImage;
-
-    public int HorNumber { get; set; }
-    public int VertNumber { get; set; }
-    public SceneManager SceneManager
-    {
-        get; set;
-    }
-    public FieldManager FieldManager
-    {
-        get; set;
-    }
-
+    
+    private FieldManager fieldManager;
+    private FieldSettings fieldSettings;
+    private SceneManager sceneManager;
+    private CellPosition position;
     public CellState currentState = CellState.Empty;
 
+    public void SetPosition(CellPosition pos)
+    {
+        position = pos;
+    }
+    
+    public void SetSceneManager(SceneManager manager)
+    {
+        sceneManager = manager;
+    }
+
+    public void SetFieldManager(FieldManager manager)
+    {
+        fieldManager = manager;
+    }
+    
     private void Start()
     {
         InitClickHandler();
@@ -33,31 +41,31 @@ public class CellController : MonoBehaviour
     {
         var eventTrigger = GetComponent<EventTrigger>();
         var eventEntry = new EventTrigger.Entry {eventID = EventTriggerType.PointerClick};
-        eventEntry.callback.AddListener(clickHandler);
+        eventEntry.callback.AddListener(ClickHandler);
         eventTrigger.triggers.Add(eventEntry);
     }
 
-    public void clickHandler(BaseEventData eventData)
+    private void ClickHandler(BaseEventData eventData)
     {
         if (currentState != CellState.Empty)
         {
             return;
         }
 
-        var state = FieldManager.CurrentState == CellState.Cross ? CellState.Cross : CellState.Zero;
+        var state = fieldManager.CurrentState == CellState.Cross ? CellState.Cross : CellState.Zero;
         SetState(state);
-        FieldManager.SwitchState(state);
+        fieldManager.SwitchState(state);
     }
 
-    public void SetState(CellState state)
+    private void SetState(CellState state)
     {
         innerImage.color = new Color(0, 0, 0, 255);
-        innerImage.sprite = SceneManager.getSprite(state);
+        innerImage.sprite = sceneManager.getSprite(state);
         currentState = state;
-        FieldManager.CurrentState = state;
+        fieldManager.CurrentState = state;
         GameData.Instance.lastState = state;
-        FieldManager.UpdateFieldState(HorNumber, VertNumber, state);
-        bool isEndGame = FieldManager.gameObject.GetComponent<WinnerChecker>().checkWinner(HorNumber, VertNumber, FieldManager.fieldState);
+        fieldManager.UpdateFieldState(position.X, position.Y, state);
+        bool isEndGame = fieldManager.gameObject.GetComponent<WinnerChecker>().checkWinner(position.X, position.Y, fieldManager.fieldState);
         if (isEndGame)
         {
             GameData.Instance.isExistGame = false;
