@@ -9,6 +9,9 @@ public class WinnerChecker : MonoBehaviour
     private int lineCount = 0;
     private FieldManager fieldManager;
     private int winLine;
+    
+    [SerializeField] public GameObject WinTitleText;
+    [SerializeField] public GameObject WinText;
 
     void Start()
     {
@@ -48,12 +51,12 @@ public class WinnerChecker : MonoBehaviour
         var sceneManager = fieldManager.sceneManager;
         if (state == CellState.Empty)
         {
-            sceneManager.WinTitleText.SetActive(false);
-            sceneManager.WinText.GetComponent<Text>().text = "Ничья!";
+            WinTitleText.SetActive(false);
+            WinText.GetComponent<Text>().text = "Ничья!";
         }
         else
         {
-            sceneManager.WinText.GetComponent<Text>().text = GameManager.GetWinnerName(state);
+            WinText.GetComponent<Text>().text = GameManager.GetWinnerName(state);
         }
         sceneManager.ShowWinner();
     }

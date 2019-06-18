@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace TrueGames.Cell
+namespace Game.Cell
 {
     public struct CellPosition
     {

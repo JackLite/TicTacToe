@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using TrueGames;
+using Game;
 
 namespace Game.Field
 {

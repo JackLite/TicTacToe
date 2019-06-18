@@ -1,6 +1,6 @@
 using System;
-using TrueGames;
-using TrueGames.Cell;
+using Game;
+using Game.Cell;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -78,7 +78,7 @@ namespace Game.Field
         {
             var innerImage = cellController.GetInnerImage();
             innerImage.color = new Color(0, 0, 0, 255);
-            innerImage.sprite = sceneManager.getSprite(fieldManager.fieldState[hor, vert]);
+            innerImage.sprite = sceneManager.GetSprite(fieldManager.fieldState[hor, vert]);
             cellController.currentState = fieldManager.fieldState[hor, vert];
         }
 

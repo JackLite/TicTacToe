@@ -1,42 +1,31 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Game.Field;
+﻿using Game.Field;
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace TrueGames
+namespace Game
 {
     public class SceneManager : MonoBehaviour
     {
-        [SerializeField] public Sprite cell;
         [SerializeField] public Sprite cross;
         [SerializeField] public Sprite zero;
-        [SerializeField] public GameObject GameField;
-        [SerializeField] public GameObject GameScreen;
-        [SerializeField] public GameObject EndGameScreen;
-        [SerializeField] public GameObject WinTitleText;
-        [SerializeField] public GameObject WinText;
+        
+        [SerializeField] 
+        private GameObject gameScreen;
+        
+        [SerializeField] 
+        private GameObject endGameScreen;
 
-        public GameObject LastCell { get; set; }
-
-        public Sprite getCell()
+        public Sprite GetSprite(CellState state)
         {
-            return cell;
-        }
-
-        public Sprite getSprite(CellState state)
-        {
-            if (state == CellState.Cross)
+            switch (state)
             {
-                return cross;
-            }
-            else if(state == CellState.Zero)
-            {
-                return zero;
-            }
-            else
-            {
-                return null;
+                case CellState.Cross:
+                    return cross;
+                case CellState.Zero:
+                    return zero;
+                case CellState.Empty:
+                    return null;
+                default:
+                    return null;
             }
         }
 
@@ -58,10 +47,12 @@ namespace TrueGames
 
         public void ShowWinner()
         {
-            GameScreen.SetActive(false);
-            EndGameScreen.SetActive(true);
+            gameScreen.SetActive(false);
+            endGameScreen.SetActive(true);
         }
 
+        // ReSharper disable once MemberCanBeMadeStatic.Global
+        // ReSharper disable once MemberCanBePrivate.Global
         public void ReturnToMenu()
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene(GameManager.MenuSceneName);

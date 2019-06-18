@@ -1,6 +1,6 @@
 ﻿using Game.Field;
-using TrueGames;
-using TrueGames.Cell;
+using Game;
+using Game.Cell;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -58,7 +58,7 @@ public class CellController : MonoBehaviour
     private void SetState(CellState state)
     {
         innerImage.color = new Color(0, 0, 0, 255);
-        innerImage.sprite = sceneManager.getSprite(state);
+        innerImage.sprite = sceneManager.GetSprite(state);
         currentState = state;
         fieldManager.CurrentState = state;
         GameData.Instance.lastState = state;
