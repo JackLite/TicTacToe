@@ -52,4 +52,9 @@ public class GameManager : MonoBehaviour
                 throw new System.Exception("Передано неверное состояние");
         }
     }
+
+    public static PlayersManager GetPlayersManager()
+    {
+        return _instance.GetComponent<PlayersManager>();
+    }
 }

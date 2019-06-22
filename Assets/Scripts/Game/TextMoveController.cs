@@ -9,7 +9,7 @@ public class TextMoveController : MonoBehaviour {
 
     public void ChangeWhoMove(CellState state)
     {
-        var text = GameManager.GetInstance().GetComponent<PlayersManager>().getWhoMoveNick(state);
+        var text = PlayersManager.GetWhoMoveNick(state);
         whoMoveText.text = text;
     }
 }

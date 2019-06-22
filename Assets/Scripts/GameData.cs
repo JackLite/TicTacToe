@@ -1,9 +1,5 @@
 ﻿using System;
-using System.IO;
 using Game.Field;
-using Menu;
-using UnityEngine;
-using UnityEngine.Serialization;
 
 [Serializable]
 public class GameData
@@ -16,15 +12,7 @@ public class GameData
 
     public static GameData Instance
     {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = DataManager.GetGameData();
-            }
-
-            return _instance;
-        }
+        get { return _instance ?? (_instance = DataManager.GetGameData()); }
     }
 
     private static GameData _instance;

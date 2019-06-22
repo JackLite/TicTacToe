@@ -28,12 +28,11 @@ namespace Menu
 
         private void SaveOptions()
         {
-            var playersManager = GameManager.GetInstance().gameObject.GetComponent<PlayersManager>();
-            playersManager.playerOneName = playerOneNickField.text;
-            playersManager.playerTwoName = playerTwoNickField.text;
-
-            GameData.Instance.playersName.first = playersManager.playerOneName;
-            GameData.Instance.playersName.second = playersManager.playerTwoName;
+            var playerOneName = playerOneNickField.text;
+            var playerTwoName = playerTwoNickField.text;
+            
+            GameData.Instance.playersName.first = playerOneName;
+            GameData.Instance.playersName.second = playerTwoName;
             DataManager.SaveGameData();
         }
     }
