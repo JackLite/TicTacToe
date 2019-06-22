@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Menu
 {
@@ -9,33 +7,34 @@ namespace Menu
         public GameObject menu;
         public GameObject preGameOptions;
         public GameObject options;
-        public GameObject autors;
-        public enum State { menu, preGameOptions, options, autors };
+        public GameObject authors;
 
-        private State currentState = State.menu;
+        private enum State { Menu, PreGameOptions, Options, Authors };
+
+        private State currentState = State.Menu;
 
         public void ShowOptions()
         {
             menu.SetActive(false);
-            ChangeState(State.options);
+            ChangeState(State.Options);
         }
 
         public void ShowPreGameOptions()
         {
             menu.SetActive(false);
-            ChangeState(State.preGameOptions);
+            ChangeState(State.PreGameOptions);
         }
 
         public void ShowAutors()
         {
             menu.SetActive(false);
-            ChangeState(State.autors);
+            ChangeState(State.Authors);
         }
 
         public void ShowMenu()
         {
             DeactivePrev();
-            ChangeState(State.menu);
+            ChangeState(State.Menu);
         }
 
         private void ChangeState(State state)
@@ -48,14 +47,14 @@ namespace Menu
         {
             switch (currentState)
             {
-                case State.preGameOptions:
+                case State.PreGameOptions:
                     preGameOptions.SetActive(false);
                     break;
-                case State.options:
+                case State.Options:
                     options.SetActive(false);
                     break;
-                case State.autors:
-                    autors.SetActive(false);
+                case State.Authors:
+                    authors.SetActive(false);
                     break;
             }
         }
@@ -64,17 +63,17 @@ namespace Menu
         {
             switch (state)
             {
-                case State.menu:
+                case State.Menu:
                     menu.SetActive(true);
                     break;
-                case State.preGameOptions:
+                case State.PreGameOptions:
                     preGameOptions.SetActive(true);
                     break;
-                case State.options:
+                case State.Options:
                     options.SetActive(true);
                     break;
-                case State.autors:
-                    autors.SetActive(true);
+                case State.Authors:
+                    authors.SetActive(true);
                     break;
             }
         }
@@ -83,7 +82,7 @@ namespace Menu
         {
             if (!Input.GetKey(KeyCode.Escape)) return;
             
-            if (currentState != State.menu)
+            if (currentState != State.Menu)
             {
                 ShowMenu();
             }

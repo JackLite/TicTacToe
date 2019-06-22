@@ -1,6 +1,4 @@
-﻿using Game.Field;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
@@ -36,21 +34,6 @@ public class GameManager : MonoBehaviour
     public static GameManager GetInstance()
     {
         return _instance;
-    }
-    
-    public static string GetWinnerName(CellState state)
-    {
-        switch (state)
-        {
-            case CellState.Cross:
-                return GameData.Instance.playersName.first;
-            case CellState.Zero:
-                return GameData.Instance.playersName.second;
-            case CellState.Empty:
-                throw new System.Exception("Передано неверное состояние");
-            default:
-                throw new System.Exception("Передано неверное состояние");
-        }
     }
 
     public static PlayersManager GetPlayersManager()

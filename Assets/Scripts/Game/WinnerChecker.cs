@@ -56,7 +56,7 @@ public class WinnerChecker : MonoBehaviour
         }
         else
         {
-            WinText.GetComponent<Text>().text = GameManager.GetWinnerName(state);
+            WinText.GetComponent<Text>().text = PlayersManager.GetWinnerName(state);
         }
         sceneManager.ShowWinner();
     }
