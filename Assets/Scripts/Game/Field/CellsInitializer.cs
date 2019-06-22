@@ -87,6 +87,7 @@ namespace Game.Field
             cellController.SetFieldManager(fieldManager);
             cellController.SetSceneManager(sceneManager);
             cellController.SetPosition(new CellPosition(hor, vert));
+            cellController.CellChange += fieldManager.GetWinnerCheckerCellChangeHandler();
         }
 
         private void CalculateCellSize(GameObject cell, int hor, int vert)

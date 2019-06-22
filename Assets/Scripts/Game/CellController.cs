@@ -18,6 +18,10 @@ public class CellController : MonoBehaviour
     private CellPosition position;
     private SceneManager sceneManager;
 
+    public delegate void CellChangeHandler(CellPosition position);
+
+    public event CellChangeHandler CellChange; 
+
     public void SetPosition(CellPosition pos)
     {
         position = pos;
@@ -63,15 +67,17 @@ public class CellController : MonoBehaviour
         fieldManager.CurrentState = state;
         GameData.Instance.lastState = state;
         fieldManager.UpdateFieldState(position.X, position.Y, state);
-        //todo после рефакторинга WinnerChecker вынести последние 4 строки в делегат и повесить на событие обновления поля
-        var isEndGame = fieldManager.GetComponent<WinnerChecker>().checkWinner(position.X, position.Y, fieldManager.fieldState);
-        if (!isEndGame) return;
-        GameData.Instance.isExistGame = false;
-        DataManager.SaveGameData();
+        OnCellChange();
     }
 
     public Image GetInnerImage()
     {
         return innerImage;
+    }
+
+    protected virtual void OnCellChange()
+    {
+        var handler = CellChange;
+        if (handler != null) handler(position);
     }
 }

@@ -3,7 +3,7 @@ using Game;
 
 namespace Game.Field
 {
-    [RequireComponent(typeof(TextMoveController))]
+    [RequireComponent(typeof(TextMoveController), typeof(WinnerChecker))]
     public class FieldManager : MonoBehaviour
     {
         private int horCellsCount;
@@ -11,6 +11,7 @@ namespace Game.Field
         private RectTransform rectTransform;
         private FieldRectSize fieldRectSize;
         private TextMoveController textMoveController;
+        private WinnerChecker winnerChecker;
         
         [SerializeField]
         public SceneManager sceneManager;
@@ -24,6 +25,7 @@ namespace Game.Field
             vertCellsCount = GameData.Instance.fieldSettings.height;
             rectTransform = GetComponent<RectTransform>();
             textMoveController = GetComponent<TextMoveController>();
+            winnerChecker = GetComponent<WinnerChecker>();
         }
 
         private void Start()
@@ -95,6 +97,11 @@ namespace Game.Field
         {
             CurrentState = current == CellState.Cross ? CellState.Zero : CellState.Cross;
             textMoveController.ChangeWhoMove(CurrentState);
+        }
+
+        public CellController.CellChangeHandler GetWinnerCheckerCellChangeHandler()
+        {
+            return winnerChecker.OnCellChange;
         }
     }
 }

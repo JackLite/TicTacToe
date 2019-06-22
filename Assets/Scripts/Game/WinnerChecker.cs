@@ -1,24 +1,37 @@
-﻿using Game.Field;
+﻿using Game.Cell;
+using Game.Field;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(FieldManager))]
 public class WinnerChecker : MonoBehaviour
 {
     private int horCellsCount;
     private int vertCellsCount;
-    private int lineCount = 0;
-    private FieldManager fieldManager;
+    private int lineCount;
     private int winLine;
-    
-    [SerializeField] public GameObject WinTitleText;
-    [SerializeField] public GameObject WinText;
+    private FieldManager fieldManager;
 
-    void Start()
+    [SerializeField] 
+    private GameObject winTitleText;
+    
+    [SerializeField] 
+    private GameObject winText;
+    
+    private void Awake()
     {
-        fieldManager = GetComponent<FieldManager>();
         horCellsCount = GameData.Instance.fieldSettings.width;
         vertCellsCount = GameData.Instance.fieldSettings.height;
         winLine = GameData.Instance.fieldSettings.winLine;
+        fieldManager = GetComponent<FieldManager>();
+    }
+
+    public void OnCellChange(CellPosition position)
+    {
+        var isEndGame = checkWinner(position.X, position.Y, fieldManager.fieldState);
+        if (!isEndGame) return;
+        GameData.Instance.isExistGame = false;
+        DataManager.SaveGameData();
     }
 
     public bool checkWinner(int last_hor, int last_vert, CellState[,] fieldState)
@@ -51,12 +64,12 @@ public class WinnerChecker : MonoBehaviour
         var sceneManager = fieldManager.sceneManager;
         if (state == CellState.Empty)
         {
-            WinTitleText.SetActive(false);
-            WinText.GetComponent<Text>().text = "Ничья!";
+            winTitleText.SetActive(false);
+            winText.GetComponent<Text>().text = "Ничья!";
         }
         else
         {
-            WinText.GetComponent<Text>().text = PlayersManager.GetWinnerName(state);
+            winText.GetComponent<Text>().text = PlayersManager.GetWinnerName(state);
         }
         sceneManager.ShowWinner();
     }
