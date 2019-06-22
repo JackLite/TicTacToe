@@ -2,14 +2,17 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TextMoveController : MonoBehaviour {
-
-    [SerializeField] 
-    private Text whoMoveText;
-
-    public void ChangeWhoMove(CellState state)
+namespace Game
+{
+    public class TextMoveController : MonoBehaviour
     {
-        var text = PlayersManager.GetWhoMoveNick(state);
-        whoMoveText.text = text;
+        [SerializeField]
+        private Text whoMoveText;
+
+        public void ChangeWhoMove(CellState state)
+        {
+            var text = PlayersManager.GetWhoMoveNick(state);
+            whoMoveText.text = text;
+        }
     }
 }

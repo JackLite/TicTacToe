@@ -1,8 +1,6 @@
 using System;
-using Game;
 using Game.Cell;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Game.Field
 {

@@ -35,9 +35,4 @@ public class GameManager : MonoBehaviour
     {
         return _instance;
     }
-
-    public static PlayersManager GetPlayersManager()
-    {
-        return _instance.GetComponent<PlayersManager>();
-    }
 }

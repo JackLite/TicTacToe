@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using Game;
 
 namespace Game.Field
 {

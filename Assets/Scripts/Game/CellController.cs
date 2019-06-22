@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class CellController : MonoBehaviour
+public sealed class CellController : MonoBehaviour
 {
     public CellState currentState = CellState.Empty;
 
@@ -75,7 +75,7 @@ public class CellController : MonoBehaviour
         return innerImage;
     }
 
-    protected virtual void OnCellChange()
+    private void OnCellChange()
     {
         var handler = CellChange;
         if (handler != null) handler(position);
