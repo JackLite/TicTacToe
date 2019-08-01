@@ -253,7 +253,7 @@ GameObject:
   m_Component:
   - component: {fileID: 354004085}
   m_Layer: 5
-  m_Name: Autors
+  m_Name: Authors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -468,9 +468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f57977a72ad715429df9a2a03208112, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameSceneName: Game
   isResumeGame: 0
-  isExistGame: 0
 --- !u!4 &467395376
 Transform:
   m_ObjectHideFlags: 0
@@ -497,8 +495,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a7e4f6b00a43024a9db4a7c8ad4a3c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 1741570341367122, guid: 7bed356afc8c01a48a24f5b074f258d6,
-    type: 3}
 --- !u!114 &467395378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2199,7 +2195,7 @@ MonoBehaviour:
   menu: {fileID: 457059931}
   preGameOptions: {fileID: 306544040}
   options: {fileID: 438737048}
-  autors: {fileID: 354004084}
+  authors: {fileID: 354004084}
 --- !u!114 &1354279462
 MonoBehaviour:
   m_ObjectHideFlags: 0
