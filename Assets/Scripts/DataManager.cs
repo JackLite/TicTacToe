@@ -1,14 +1,11 @@
 ﻿using UnityEngine;
-using System.IO;
-using System.Runtime.Serialization; 
-using System.Runtime.Serialization.Formatters.Binary;
 
 public class DataManager : MonoBehaviour {
-    private const string PlayersFileName = "/game.data";
+    private const string SavedJsonDataKey = "SavedJsonData";
 
     public static GameData GetGameData()
     {
-        if(!File.Exists(Application.persistentDataPath + PlayersFileName))
+        if(!PlayerPrefs.HasKey(SavedJsonDataKey))
         {
             var gameData = new GameData
             {
@@ -17,32 +14,22 @@ public class DataManager : MonoBehaviour {
             };
             return gameData;
         }
-        GameData savedData;
-        try
-        {
-            IFormatter formatter = new BinaryFormatter();
-            FileStream buffer = File.OpenRead(Application.persistentDataPath + PlayersFileName);
-            savedData = formatter.Deserialize(buffer) as GameData;
-            buffer.Close();
-        } catch (EndOfStreamException e)
-        {
-            Debug.Log(e.Message);
-            savedData = new GameData();
-        }
+
+        var json = PlayerPrefs.GetString(SavedJsonDataKey);
+        var savedData = JsonUtility.FromJson<GameData>(json);
+        
         return savedData;
     } 
 
     public static void SaveGameData()
     {
-        IFormatter formatter = new BinaryFormatter();
-        FileStream buffer = File.Create(Application.persistentDataPath + PlayersFileName);
-        formatter.Serialize(buffer, GameData.Instance);
-        buffer.Close();
+        var json = JsonUtility.ToJson(GameData.Instance);
+        PlayerPrefs.SetString(SavedJsonDataKey, json);
     }
 
     public static void ClearGameData()
     {
-        File.Delete(Application.persistentDataPath + PlayersFileName);
+        PlayerPrefs.DeleteKey(SavedJsonDataKey);
     }
 	
 }
