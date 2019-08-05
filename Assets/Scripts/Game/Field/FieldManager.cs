@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using Game.Cell;
+using UnityEngine;
 
 namespace Game.Field
 {
@@ -101,6 +103,17 @@ namespace Game.Field
         public CellController.CellChangeHandler GetWinnerCheckerCellChangeHandler()
         {
             return winnerChecker.OnCellChange;
+        }
+
+        public static CellController Find(CellPosition position)
+        {
+            var cells = GameObject.FindGameObjectsWithTag("Cell");
+            return (
+                from cellGo in cells
+                let controller = cellGo.GetComponent<CellController>()
+                where controller != null && Equals(controller.GetPosition(), position)
+                select controller
+            ).FirstOrDefault();
         }
     }
 }

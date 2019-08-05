@@ -1,6 +1,7 @@
 ﻿using Game.Field;
 using Game;
 using Game.Cell;
+using Online;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -25,6 +26,11 @@ public sealed class CellController : MonoBehaviour
     public void SetPosition(CellPosition pos)
     {
         position = pos;
+    }
+
+    public CellPosition GetPosition()
+    {
+        return position;
     }
 
     public void SetSceneManager(SceneManager manager)
@@ -53,13 +59,21 @@ public sealed class CellController : MonoBehaviour
     private void ClickHandler(BaseEventData eventData)
     {
         if (currentState != CellState.Empty) return;
-
+        if (!IsAllowToStep()) return;
         var state = fieldManager.CurrentState == CellState.Cross ? CellState.Cross : CellState.Zero;
         SetState(state);
         fieldManager.SwitchState(state);
+        OnlineStepManager.MakeStep(position, state);
     }
 
-    private void SetState(CellState state)
+    private bool IsAllowToStep()
+    {
+        if (GameManager.GetInstance().gameMode == GameMode.TwoPlayers) return true;
+
+        return OnlineStepManager.IsCurrentPlayerStep();
+    }
+
+    public void SetState(CellState state)
     {
         innerImage.color = new Color(0, 0, 0, 255);
         innerImage.sprite = sceneManager.GetSprite(state);
@@ -77,7 +91,6 @@ public sealed class CellController : MonoBehaviour
 
     private void OnCellChange()
     {
-        var handler = CellChange;
-        if (handler != null) handler(position);
+        CellChange?.Invoke(position);
     }
 }

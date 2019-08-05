@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 114247954168559182}
   m_Layer: 0
   m_Name: Cell
-  m_TagString: Untagged
+  m_TagString: Cell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -163,8 +163,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 645199fe1ed0c514cb6d7d44ef1f824c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  innerImage: {fileID: 114415401055669128}
   currentState: 0
+  innerImage: {fileID: 114415401055669128}
 --- !u!114 &114247954168559182
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -35,3 +35,5 @@ sysinfo.txt
 
 .idea
 Logs
+/Assets/3d-party/
+/Assets/3d-party.meta

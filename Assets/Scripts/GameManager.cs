@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     private static GameManager _instance;
 
     public bool isResumeGame;
+    public GameMode gameMode;
         
     private void Awake()
     {

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Menu
 {
@@ -9,80 +10,38 @@ namespace Menu
         public GameObject options;
         public GameObject authors;
 
-        private enum State { Menu, PreGameOptions, Options, Authors };
+        private GameObject currentActiveScreen;
 
-        private State currentState = State.Menu;
+        private void Start()
+        {
+            currentActiveScreen = menu;
+        }
 
         public void ShowOptions()
         {
-            menu.SetActive(false);
-            ChangeState(State.Options);
+            ShowScreen(options);
         }
 
         public void ShowPreGameOptions()
         {
-            menu.SetActive(false);
-            ChangeState(State.PreGameOptions);
+            ShowScreen(preGameOptions);
         }
 
         public void ShowAutors()
         {
-            menu.SetActive(false);
-            ChangeState(State.Authors);
+            ShowScreen(authors);
         }
 
         public void ShowMenu()
         {
-            DeactivePrev();
-            ChangeState(State.Menu);
-        }
-
-        private void ChangeState(State state)
-        {
-            currentState = state;
-            ActiveNew(state);
-        }
-
-        private void DeactivePrev()
-        {
-            switch (currentState)
-            {
-                case State.PreGameOptions:
-                    preGameOptions.SetActive(false);
-                    break;
-                case State.Options:
-                    options.SetActive(false);
-                    break;
-                case State.Authors:
-                    authors.SetActive(false);
-                    break;
-            }
-        }
-
-        private void ActiveNew(State state)
-        {
-            switch (state)
-            {
-                case State.Menu:
-                    menu.SetActive(true);
-                    break;
-                case State.PreGameOptions:
-                    preGameOptions.SetActive(true);
-                    break;
-                case State.Options:
-                    options.SetActive(true);
-                    break;
-                case State.Authors:
-                    authors.SetActive(true);
-                    break;
-            }
+            ShowScreen(menu);
         }
 
         private void Update()
         {
             if (!Input.GetKey(KeyCode.Escape)) return;
             
-            if (currentState != State.Menu)
+            if (currentActiveScreen.name != "MainMenu")
             {
                 ShowMenu();
             }
@@ -90,6 +49,13 @@ namespace Menu
             {
                 Application.Quit();
             }
+        }
+
+        public void ShowScreen(GameObject screen)
+        {
+            currentActiveScreen.SetActive(false);
+            screen.SetActive(true);
+            currentActiveScreen = screen;
         }
     }
 }
