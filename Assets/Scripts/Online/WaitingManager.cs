@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Online
+namespace Game.Online
 {
     public class WaitingManager : MonoBehaviour
     {

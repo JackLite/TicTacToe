@@ -1,7 +1,7 @@
 ﻿using Game.Field;
 using Game;
 using Game.Cell;
-using Online;
+using Game.Online;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -60,10 +60,22 @@ public sealed class CellController : MonoBehaviour
     {
         if (currentState != CellState.Empty) return;
         if (!IsAllowToStep()) return;
-        var state = fieldManager.CurrentState == CellState.Cross ? CellState.Cross : CellState.Zero;
+        GameManager gameManager = GameManager.GetInstance();
+        CellState state;
+        if(gameManager.gameMode == GameMode.Online)
+        {
+            state = gameManager.player.playerType == Core.PlayerType.cross ? CellState.Cross : CellState.Zero;
+            Core.Step step = new Core.Step { cellPosition = position, player = gameManager.player };
+            OnlineStepManager.MakeStep(step);
+        }
+        else
+        {
+            state = fieldManager.CurrentState == CellState.Cross ? CellState.Cross : CellState.Zero;
+            fieldManager.SwitchState(state);
+        }
         SetState(state);
-        fieldManager.SwitchState(state);
-        OnlineStepManager.MakeStep(position, state);
+        
+        
     }
 
     private bool IsAllowToStep()

@@ -9,6 +9,7 @@ public class GameData
     public CellState[,] fieldState;
     public CellState lastState;
     public bool isExistGame;
+    public string onlineNickName;
 
     public static GameData Instance
     {

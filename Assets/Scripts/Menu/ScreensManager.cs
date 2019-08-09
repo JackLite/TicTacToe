@@ -44,6 +44,10 @@ namespace Menu
             if (currentActiveScreen.name != "MainMenu")
             {
                 ShowMenu();
+                if (GameManager.GetInstance().gameMode == GameMode.Online)
+                {
+                    Game.Online.Network.Disconnect();
+                }
             }
             else
             {

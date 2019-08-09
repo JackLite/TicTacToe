@@ -9,9 +9,15 @@ namespace Game
         [SerializeField]
         private Text whoMoveText;
 
+        private void Start()
+        {
+            Online.OnlineStepManager.textMove = this;
+        }
+
         public void ChangeWhoMove(CellState state)
         {
             var text = PlayersManager.GetWhoMoveNick(state);
+            Debug.Log(text);
             whoMoveText.text = text;
         }
     }

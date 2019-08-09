@@ -51,11 +51,13 @@ namespace Game
             endGameScreen.SetActive(true);
         }
 
-        // ReSharper disable once MemberCanBeMadeStatic.Global
-        // ReSharper disable once MemberCanBePrivate.Global
         public void ReturnToMenu()
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene(GameManager.MenuSceneName);
+            if(GameManager.GetInstance().gameMode == GameMode.Online)
+            {
+                Online.Network.Disconnect();
+            }
         }
     }
 }

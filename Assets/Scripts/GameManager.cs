@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Core;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class GameManager : MonoBehaviour
 
     public bool isResumeGame;
     public GameMode gameMode;
+    public Player player;
         
     private void Awake()
     {
